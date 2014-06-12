@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS Practices</title>
+	<link rel="stylesheet" type="text/css" href="css_notes.css">
+</head>
+<body>
+	<div class="grouping">
+		<div class="base"></div>
+		<div class="base radius"></div>
+		<div class="base radius ellipse"></div>
+	</div>
+	
+	<div class="main">
+		<h1 id="top">Combinators</h1>
+		<a class="link" href="#">A direct child of .main</a>
+		<p> para 1</p>
+		<a href="#a"> link a </a>
+		
+		<h2>Heading 2</h2>
+		<a href="#b">link b</a>
+		<p> para 2
+			<a href="#">not a direct child of .mian</a>
+		</p>
+		<p>para 3</p>
+
+		<h3>head 3</h3>
+		<a href="#c">link c</a>
+		<p>p1</p>
+		<p>p2</p>
+
+		<a href="#" target="_blank">View more in a new tab &raquo;</a>
+		<form class="e-form">
+			<input type="text" name="email">
+			<input type="submit" name = "submit">
+		</form>
+	</div>
+	
+	<div class="list">
+		<h1>the ul is now <span>my sibling</span></h1>
+		<ul>
+			<li><b>first</b> child of ul</li>
+			<li>second child</li>
+			<li>third <span>child</span><b>!!</b></li>
+			<li>fourth</li>
+			<li>last child of ul</li>
+		</ul>		
+	</div>
+
+
+
+	<a href="#top">Back to Top</a>
+</body>
+</html>

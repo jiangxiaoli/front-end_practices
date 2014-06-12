@@ -1,1 +1,137 @@
-/*css notes*/
+/*  css notes
+	from treehouse.com/library/css-foundations
+	06/12/14
+	By Xiaoli
+*/
+
+/* selectors - grouping design DRY */
+/*grouping*/
+.grouping {
+	margin:  auto;
+	padding: 20px;
+	width: 760px;
+}
+.square,
+.round,
+.ellipse {
+	display: inline-block;
+	margin:0 15px;
+	width: 100px;
+	height:100px;
+	background-color: lightcoral;
+}
+/* DRY design: level1 - base */
+.base {
+	display: inline-block;
+	margin:0 15px;
+	width: 100px;
+	height:100px;
+	background-color: lightcoral;
+}
+/*level2 - radius */
+.radius {
+	border-radius: 50%;
+}
+/*level3 - ellipse */
+.ellipse {
+	height:50px;
+}
+
+/* using combinators */
+body {
+	font: 1.1em/1.5 sans-serif;
+	padding-top:  20px; 
+
+}
+.main {
+	border: 1px dotted lightgrey;
+	margin:  auto;
+	padding: 10px 20px 20px;
+	width: 760px;
+	background-color: #e8e8e8;
+}
+/*direct children > */
+.main > a {
+	color: red;
+}
+/*adjcent sibling + ; general sibling ~*/
+h2 + p,
+h3 ~ p {
+	color: white;
+	padding:  10px;
+	background-color: royalblue;
+}
+
+/* attribute selectors */
+a[class="link"] {
+	background-color: crimson;
+	color: white;
+}
+input[type="text"]{
+	width: 200px;
+	height: 25px;
+	border: 2px solid grey;
+	background-color: lightyellow;
+}
+input[type="submit"]{
+	margin-left:  5px;
+	width:100px;
+	height: 30px;
+	border: none;
+	background-color: steelblue;
+	color: white;
+}
+a[target="_blank"]{
+	text-decoration: :none;
+	border-bottom: 2px dotted crimson;
+}
+
+/* pseudo-class */
+a:link {
+	color:  red;
+}
+a:visited {
+	color: green;
+}
+a:hover {
+	color: white;
+	text-decoration: none;
+	background-color: tomato;
+}
+a:active {
+	font-size:  26px;
+}
+input:focus {
+	background-color: yellow;
+}
+
+/* structural pseudo-classes */
+.list {
+	padding: 1% 25%;
+	font-family: sans-serif;
+	border:2px dotted #e8e8e8;
+	width: 450px;
+	margin: auto;
+}
+ul {
+	margin:  25px auto 0;
+	padding: 12px;
+	list-style-position: inside;
+	font-size: 1.2em;
+}
+li {
+	margin: 0;
+	padding:  15px;
+	border-bottom: 2px solid #224a6b;
+}
+/* :first-child; :last-child; :only-child */
+li:last-child {
+	background-color: steelblue;
+	color: white;
+	border:none;
+}
+span:only-child{
+	color: lightcoral;
+}
+
+
