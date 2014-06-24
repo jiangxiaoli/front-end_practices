@@ -155,6 +155,7 @@
 				
 				<h2>Jalapeño So Spicy</h2>
 				<p>This spicy cupcake has a chocolatey cake with a kick, creamy vanilla lime icing, and topped with a lime wedge.</p>
+				
 				<div class="order_form">
 					<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 						<input type="hidden" name="cmd" value="_cart">
@@ -229,5 +230,15 @@
 
 			</div>
 		</div>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript">
+		$(".order_form").hide().before("<a href='#' class='order_now'>Order Now</a>"); 
+		$(".order_now").click(function(){
+			var $link = $(this);
+			$link.next().show("slow").prev().remove();
+			//$link.remove();
+			return false;
+		});
+		</script>
 </body>
 </html>

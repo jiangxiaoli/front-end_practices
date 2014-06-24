@@ -115,5 +115,75 @@
 			</div>
 			
 		</div>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript">
+			
+			var $submit = $(".submit input");
+
+			//store required
+			var $required = $(".required");
+
+			function containsBlanks(){
+				
+				//map
+				var blanks = $required.map(function(){ 
+					return $(this).val() =="";
+				});
+				//jquery.inArray method
+				return $.inArray(true, blanks) != -1;	
+
+				/*
+				//use array to store the filledins
+				var blanks = new Array();
+
+				//take each filed
+				$required.each(function (){
+					//push to add values
+					blanks.push($(this).val() == "");
+				});
+				
+				//sort to put false to the front of array, pop the first one
+				//return blanks.sort().pop();	*/
+
+				
+			}
+
+			function isValidEmail(email){
+				//indexof, if has "@" return the index, or return -1
+				return email.indexOf("@");
+			}
+
+      		function requiredFilledIn(){
+        		if(containsBlanks() || !isValidEmail($("#email").val())) 
+        			$submit.attr("disabled", "disabled");
+        		else 
+        			$submit.removeAttr("disabled");
+        	}
+			
+			//Input event: focus, blur, fadeIn, fadeOut, keyup
+			$("#form span").hide();
+			$("input, textarea").focus(function(){
+				$(this).next().fadeIn("slow");
+			}).blur(function(){
+				$(this).next().fadeOut("slow");
+			}).keyup(function(){
+				//check all required fields
+				requiredFilledIn();
+			});
+
+			$("#email").keyup(function(){
+				//check a valid email address
+				//modify attributes- addClass
+				if(isValidEmail($(this).val()) != -1) 
+					$(this).next().removeClass("error").addClass("valid");
+				else 
+					$(this).next().removeClass("valid").addClass("error");
+			});
+
+			requiredFilledIn();
+
+		</script>
+
+
 	</body>
 	</html>
