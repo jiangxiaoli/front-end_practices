@@ -307,11 +307,30 @@ var gems = [
 	<input ng-model="review.color" type="radio" value="red" /> red
 	<input ng-model="review.color" type="radio" value="green" /> green
 
-/*** 3.2 accept a review ***/
+/*** 3.2 accept a review submission ***/
+//--in js
+	//add review controller
+	app.controller('ReviewController', function(){
+		this.review = {};
+		//add review method, push new review onto the product's reviews array
+		this.addReview = function(product){
+			product.reviews.push(this.review);
+			//clear out the form, form will reset
+			this.review={};
+		};
+	});
+//--in html
+		//<!-- review controller-->
+		//<!-- ng-submit  -->
+	<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
+		//<!-- live preview -->
+		<blockquote>
+			<b>{{reviewCtrl.review.stars}} Stars</b>
+			{{reviewCtrl.review.body}}
+			<p><cite class="clearfix">-{{reviewCtrl.review.author}}</cite></p>	
+		</blockquote>
 
-
-
-
+/*** 3.3 form validations ***/
 
 
 

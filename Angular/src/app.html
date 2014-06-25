@@ -78,29 +78,31 @@
 							</div>
 
 							<!-- review form  -->
-							<form name="reviewForm">
+								<!-- review controller-->
+								<!-- ng-submit  -->
+							<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
 								<!-- live preview -->
 								<blockquote>
-									<b>{{review.stars}} Stars</b>
-									{{review.body}}
-									<p><cite class="clearfix">-{{review.author}}</cite></p>	
+									<b>{{reviewCtrl.review.stars}} Stars</b>
+									{{reviewCtrl.review.body}}
+									<p><cite class="clearfix">-{{reviewCtrl.review.author}}</cite></p>	
 								</blockquote>
 
 								<!-- input review -->
 								<h4>Submit a review</h4>
 								<!-- ng-model binds the form element value to the property: two waybinding -->
 								<fieldset class="form-group">
-									<select ng-model="review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" titlw="Stars">
+									<select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" titlw="Stars">
 										<option value="">Rate the Product</option>
 									</select>	
 								</fieldset>
 
 								<fieldset class="form-group">
-									<textarea ng-model="review.body" class="form-control" placeholder="write something..." title="Review"></textarea>		
+									<textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="write something..." title="Review"></textarea>		
 								</fieldset>
 
 								<fieldset class="form-group">
-									<input ng-model="review.author" type="email" class="form-control" title="Email">
+									<input ng-model="reviewCtrl.review.author" type="email" class="form-control" title="Email">
 								</fieldset>
 
 								<fieldset class="form-group">

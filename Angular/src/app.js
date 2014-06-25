@@ -15,18 +15,28 @@
 	app.controller('PanelController',function(){
 		//init
 		this.tab = 1;
-
 		//select tab function
 		this.selectTab = function(setTab) {
 			this.tab =setTab;
 		};
-
 		//comparision method
 		this.isSelected = function(checkTab){
 			return this.tab === checkTab;
 		};
-
 	});
+
+	//controller review
+	app.controller('ReviewController', function(){
+		this.review = {};
+		//add review method, push new review onto the product's reviews array
+		this.addReview = function(product){
+			product.reviews.push(this.review);
+			//clear out the form, form will reset
+			this.review={};
+		};
+	});
+
+
 
 	var gems = [
 		{
