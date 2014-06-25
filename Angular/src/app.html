@@ -5,6 +5,7 @@
 		<title>Angular Sample </title>
     	<!-- Bootstrap -->
 		<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style.css">
 		<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 		<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
@@ -73,14 +74,15 @@
 								<blockquote ng-repeat="review in product.reviews">
 									<b>{{review.stars}} Stars</b>
 									{{review.body}}
-									<p><cite class="clearfix">-{{review.author}}</cite></p>
+									<p><cite class="clearfix">-{{review.author}} on {{review.createdOn | date:'MM/dd/yyyy @ h:mma'}}</cite></p>
 								</blockquote>				
 							</div>
 
 							<!-- review form  -->
 								<!-- review controller-->
-								<!-- ng-submit  -->
-							<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
+									<!-- ng-submit  -->
+										<!-- form validation, turn off default validations "novalidate", check $valid in ng-submit -->
+							<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit=" reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
 								<!-- live preview -->
 								<blockquote>
 									<b>{{reviewCtrl.review.stars}} Stars</b>
@@ -91,19 +93,23 @@
 								<!-- input review -->
 								<h4>Submit a review</h4>
 								<!-- ng-model binds the form element value to the property: two waybinding -->
+									<!-- form validtion: mark required fields -->
 								<fieldset class="form-group">
-									<select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" titlw="Stars">
+									<select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" titlw="Stars" required>
 										<option value="">Rate the Product</option>
 									</select>	
 								</fieldset>
 
 								<fieldset class="form-group">
-									<textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="write something..." title="Review"></textarea>		
+									<textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="write something..." title="Review" required></textarea>		
 								</fieldset>
 
 								<fieldset class="form-group">
-									<input ng-model="reviewCtrl.review.author" type="email" class="form-control" title="Email">
+									<input ng-model="reviewCtrl.review.author" type="email" class="form-control" title="Email" required/>
 								</fieldset>
+								
+								<!-- debugging: print form validation -->
+								<div>reviewFrom is {{reviewForm.$valid}} </div>
 
 								<fieldset class="form-group">
 									<input type="submit" class="btn btn-primary" value="Submit Review"/>

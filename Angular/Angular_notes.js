@@ -322,7 +322,8 @@ var gems = [
 //--in html
 		//<!-- review controller-->
 		//<!-- ng-submit  -->
-	<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
+	<form name="reviewForm" ng-control
+	ler="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
 		//<!-- live preview -->
 		<blockquote>
 			<b>{{reviewCtrl.review.stars}} Stars</b>
@@ -331,8 +332,42 @@ var gems = [
 		</blockquote>
 
 /*** 3.3 form validations ***/
+//1. turn off default validation "novalidate"
+//2. put "required" in fields
+//3. check angular build-in reviewForm.$valid in ng-submit
+	<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" 
+	ng-submit=" reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+//4. <!-- debugging: print form validation -->
+	<div>reviewFrom is {{reviewForm.$valid}} </div>
+//5. form styling
+	//--in css
+	.ng-invalid.ng-dirty{
+		border-color:red;
+	}
 
-
+	.ng-valid.ng-dirty{
+		border-color:green;
+	}
+	
+//6. add createdOn date
+	//--in js
+		this.addReview = function(product){
+			//add createdOn date
+			this.review.createdOn = Date.now();
+			product.reviews.push(this.review);
+			//clear out the form, form will reset
+			this.review={};
+		};
+	//--in html
+	<!-- show reviews  -->
+	<div class="panel" ng-show="panel.isSelected(3)">
+		<h4>Reviews</h4>
+		<blockquote ng-repeat="review in product.reviews">
+			<b>{{review.stars}} Stars</b>
+			{{review.body}}
+			<p><cite class="clearfix">-{{review.author}} on {{review.createdOn | date:'MM/dd/yyyy @ h:mma'}}</cite></p>
+		</blockquote>				
+	</div>
 
 
 
