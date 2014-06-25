@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- ng-app -->
+<html ng-app = "store">
+	<head>
+		<title>Angular Sample </title>
+    	<!-- Bootstrap -->
+		<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+		<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+		<!--
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular.min.js"></script> -->
+		<script type="text/javascript" src="angular.min.js"></script> 
+		<script type="text/javascript" src="app.js"></script> 
+	</head>
+	<body>
+		<h2>Angular Sample - XJ</h2>
+
+		<!-- expressions, dynamic values -->
+		<p> {{ 4 + 6 }} <p/>
+
+		<!-- ng-controller -->
+		<div ng-controller="StoreController as store"> 
+			<!-- ng-repeat : iterate product in products -->
+			<div ng-repeat="product in store.products">
+				<!--hide content only when soldOut is true-->
+				<div ng-hide="product.soldOut">
+					<h1> {{product.name}} </h1>
+					<h2> ${{product.price}} </h2>
+					<p> {{product.description}} </p>
+					<!--show button only when canPurchase is true-->
+					<button ng-show="product.canPurchase">Add to cart </botton>			
+				</div>				
+			</div>
+		 </div>
+	
+	</body>
+</html>
