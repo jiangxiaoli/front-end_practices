@@ -21,14 +21,59 @@
 		<p> {{ 4 + 6 }} <p/>
 
 		<!-- ng-controller -->
-		<div ng-controller="StoreController as store"> 
+		<div class="container" ng-controller="StoreController as store"> 
+
 			<!-- ng-repeat : iterate product in products -->
 			<div ng-repeat="product in store.products">
+
 				<!--hide content only when soldOut is true-->
 				<div ng-hide="product.soldOut">
+
 					<h1> {{product.name}} </h1>
-					<h2> ${{product.price}} </h2>
+					<h2 class="pull-right"> {{product.price | currency}} </h2>
 					<p> {{product.description}} </p>
+					
+					<!--show images-->
+					<div ng-repeat="image in product.images" ng-show="product.images.length">
+						<img src="{{image.full}}">
+					</div>
+
+					<!-- tabs -->
+					<div>
+						<!-- ng-init -->
+						<section ng-init="tab = 1">
+							<ul class="nav nav-pills">
+								<!-- ng-click : two way data binding -->
+								<!-- ng-class : bind active class -->
+								<li ng-class="{ active:tab === 1 }">
+									<a href="" ng-click="tab = 1">Description</a>
+								</li>
+								<li ng-class="{ active:tab === 2 }">
+									<a href="" ng-click="tab = 2">Specifications</a>
+								</li>
+								<li ng-class="{ active:tab === 3 }">
+									<a href="" ng-click="tab = 3">Reviews</a>
+								</li>			
+							</ul>
+							{{tab}}
+						
+							<!-- panels -->
+							<div class="panel" ng-show="tab ===1">
+								<h4>Descriptions</h4>
+								<p>{{product.description}}</p>					
+							</div>	
+							<div class="panel" ng-show="tab ===2">
+								<h4>Specifications</h4>
+								<blockquote>None yet</blockquote>				
+							</div>	
+							<div class="panel" ng-show="tab ===3">
+								<h4>Reviews</h4>
+								<blockquote>None yet</blockquote>				
+							</div>
+						</section>	
+
+					</div>
+
 					<!--show button only when canPurchase is true-->
 					<button ng-show="product.canPurchase">Add to cart </botton>			
 				</div>				

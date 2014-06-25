@@ -17,6 +17,16 @@
 			description: 'An apple a day, keep the doctor away.',
 			canPurchase: true,
 			soldOut:false,
+			images:[
+				{
+					full:'images/apple-01-full.jpg',
+					thumb:'apple-01-thumb.jpg',
+				},
+				{
+					full:'images/apple-02-full.jpg',
+					thumb:'apple-02-thumb.jpg',
+				},
+			]
 		},
 		{		
 			name: 'Orange',
@@ -24,7 +34,8 @@
 			description: 'Love the orange color.',
 			canPurchase: true,
 			soldOut:false,
-		}
+			images:[ ]
+		},
 	];
 
 })();
