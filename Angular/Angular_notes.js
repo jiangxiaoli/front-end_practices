@@ -241,6 +241,79 @@ var gems = [
 		</div>
 	</section>
 
+/*** Level 3 Forms and Models  ***/
+/*** 3.1 add reviews form ***/
+	//--in js
+	//product review array
+	reviews: [
+		{
+			stars:5,
+			body:"I love this product",
+			author:"joe@thomas.com"
+		},
+		{
+			stars:1,
+			body:"This product sucks",
+			author:"tim@hater.com"
+
+		}
+	]
+	//--in html
+	//<!-- show reviews  -->
+	<div class="panel" ng-show="panel.isSelected(3)">
+		<h4>Reviews</h4>
+		<blockquote ng-repeat="review in product.reviews">
+			<b>{{review.stars}} Stars</b>
+			{{review.body}}
+			<p><cite class="clearfix">-{{review.author}}</cite></p>
+		</blockquote>				
+	</div>
+
+	//<!-- review form  -->
+	<form name="reviewForm">
+		//<!-- live preview -->
+		<blockquote>
+			<b>{{review.stars}} Stars</b>
+			{{review.body}}
+			<p><cite class="clearfix">-{{review.author}}</cite></p>	
+		</blockquote>
+
+		//<!-- input review -->
+		<h4>Submit a review</h4>
+		//<!-- ng-model binds the form element value to the property: two waybinding -->
+		<fieldset class="form-group">
+			<select ng-model="review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" titlw="Stars">
+				<option value="">Rate the Product</option>
+			</select>	
+		</fieldset>
+
+		<fieldset class="form-group">
+			<textarea ng-model="review.body" class="form-control" placeholder="write something..." title="Review"></textarea>		
+		</fieldset>
+
+		<fieldset class="form-group">
+			<input ng-model="review.author" type="email" class="form-control" title="Email">
+		</fieldset>
+
+		<fieldset class="form-group">
+			<input type="submit" class="btn btn-primary" value="Submit Review"/>
+		</fieldset>
+	</form>
+//two binding examples
+	//with a check box
+	<input ng-model="review.terms" type="checkbox" /> I agree tp tje ter,stars
+
+	//with radio buttons
+	<input ng-model="review.color" type="radio" value="red" /> red
+	<input ng-model="review.color" type="radio" value="green" /> green
+
+/*** 3.2 accept a review ***/
+
+
+
+
+
+
 
 
 

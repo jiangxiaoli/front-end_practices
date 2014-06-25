@@ -35,6 +35,7 @@
 			description: 'An apple a day, keep the doctor away.',
 			canPurchase: true,
 			soldOut:false,
+			//product image array
 			images:[
 				{
 					full:'images/apple-01-full.jpg',
@@ -44,6 +45,20 @@
 					full:'images/apple-02-full.jpg',
 					thumb:'apple-02-thumb.jpg',
 				},
+			],
+			//product review array
+			reviews: [
+				{
+					stars:5,
+					body:"I love this product",
+					author:"joe@thomas.com"
+				},
+				{
+					stars:1,
+					body:"This product sucks",
+					author:"tim@hater.com"
+
+				}
 			]
 		},
 		{		
@@ -52,7 +67,8 @@
 			description: 'Love the orange color.',
 			canPurchase: true,
 			soldOut:false,
-			images:[ ]
+			images:[ ],
+			reviews:[ ]
 		},
 	];
 
