@@ -5,9 +5,27 @@
 
 (function(){
 	var app = angular.module('store', [ ]);
-	//controller	
+
+	//controller store	
 	app.controller('StoreController', function(){
 		this.products = gems;
+	});
+
+	//controller panel
+	app.controller('PanelController',function(){
+		//init
+		this.tab = 1;
+
+		//select tab function
+		this.selectTab = function(setTab) {
+			this.tab =setTab;
+		};
+
+		//comparision method
+		this.isSelected = function(checkTab){
+			return this.tab === checkTab;
+		};
+
 	});
 
 	var gems = [

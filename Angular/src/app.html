@@ -14,8 +14,8 @@
 		<script type="text/javascript" src="angular.min.js"></script> 
 		<script type="text/javascript" src="app.js"></script> 
 	</head>
-	<body>
-		<h2>Angular Sample - XJ</h2>
+	<body class="list-group">
+		<h2 class="text-center">Angular Sample - XJ</h2>
 
 		<!-- expressions, dynamic values -->
 		<p> {{ 4 + 6 }} <p/>
@@ -24,7 +24,7 @@
 		<div class="container" ng-controller="StoreController as store"> 
 
 			<!-- ng-repeat : iterate product in products -->
-			<div ng-repeat="product in store.products">
+			<div class="list-group-item" ng-repeat="product in store.products">
 
 				<!--hide content only when soldOut is true-->
 				<div ng-hide="product.soldOut">
@@ -34,48 +34,50 @@
 					<p> {{product.description}} </p>
 					
 					<!--show images-->
-					<div ng-repeat="image in product.images" ng-show="product.images.length">
-						<img src="{{image.full}}">
-					</div>
+					<ul class="list-inline thumbs">
+						<li class="thumbnail" ng-repeat="image in product.images" ng-show="product.images.length">
+							<img src="{{image.full}}">
+						</li>				
+					</ul>
 
 					<!-- tabs -->
 					<div>
-						<!-- ng-init -->
-						<section ng-init="tab = 1">
+						<section class="tab" ng-controller="PanelController as panel">
 							<ul class="nav nav-pills">
 								<!-- ng-click : two way data binding -->
 								<!-- ng-class : bind active class -->
-								<li ng-class="{ active:tab === 1 }">
-									<a href="" ng-click="tab = 1">Description</a>
+								<li ng-class="{ active:panel.isSelected(1) }">
+									<a href="" ng-click="panel.selectTab(1)">Description</a>
 								</li>
-								<li ng-class="{ active:tab === 2 }">
-									<a href="" ng-click="tab = 2">Specifications</a>
+								<li ng-class="{ active:panel.isSelected(2) }">
+									<a href="" ng-click="panel.selectTab(2)">Specifications</a>
 								</li>
-								<li ng-class="{ active:tab === 3 }">
-									<a href="" ng-click="tab = 3">Reviews</a>
+								<li ng-class="{ active:panel.isSelected(3) }">
+									<a href="" ng-click="panel.selectTab(3)">Reviews</a>
 								</li>			
 							</ul>
-							{{tab}}
 						
 							<!-- panels -->
-							<div class="panel" ng-show="tab ===1">
+							<div class="panel" ng-show="panel.isSelected(1)">
 								<h4>Descriptions</h4>
 								<p>{{product.description}}</p>					
 							</div>	
-							<div class="panel" ng-show="tab ===2">
+							<div class="panel" ng-show="panel.isSelected(2)">
 								<h4>Specifications</h4>
 								<blockquote>None yet</blockquote>				
 							</div>	
-							<div class="panel" ng-show="tab ===3">
+							<div class="panel" ng-show="panel.isSelected(3)">
 								<h4>Reviews</h4>
 								<blockquote>None yet</blockquote>				
 							</div>
 						</section>	
-
 					</div>
 
 					<!--show button only when canPurchase is true-->
-					<button ng-show="product.canPurchase">Add to cart </botton>			
+					<button class="pull-right" ng-show="product.canPurchase">Add to cart </button>		
+
+					</br>
+
 				</div>				
 			</div>
 		 </div>

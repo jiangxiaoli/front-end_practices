@@ -156,7 +156,6 @@ var gems = [
 	</div>
 
 /*** 2.4 Tabs ***/
-
 //<!-- tabs -->
 	<div>
 		//<!-- ng-init -->
@@ -191,4 +190,58 @@ var gems = [
 			</div>
 		</section>	
 	</div>
+
+//tabs cleaner code - with panel controller
+	//--in js, build controller
+		//controller panel
+	app.controller('PanelController',function(){
+		//init
+		this.tab = 1;
+
+		//select tab function
+		this.selectTab = function(setTab) {
+			this.tab =setTab;
+		};
+
+		//comparision method
+		this.isSelected = function(checkTab){
+			return this.tab === checkTab;
+		};
+
+	});
+
+	//--in html, use the controller
+	<section class="tab" ng-controller="PanelController as panel">
+		<ul class="nav nav-pills">
+			//<!-- ng-click : two way data binding -->
+			//<!-- ng-class : bind active class -->
+			<li ng-class="{ active:panel.isSelected(1) }">
+				<a href="" ng-click="panel.selectTab(1)">Description</a>
+			</li>
+			<li ng-class="{ active:panel.isSelected(2) }">
+				<a href="" ng-click="panel.selectTab(2)">Specifications</a>
+			</li>
+			<li ng-class="{ active:panel.isSelected(3) }">
+				<a href="" ng-click="panel.selectTab(3)">Reviews</a>
+			</li>			
+		</ul>
+	
+		//<!-- panels -->
+		<div class="panel" ng-show="panel.isSelected(1)">
+			<h4>Descriptions</h4>
+			<p>{{product.description}}</p>					
+		</div>	
+		<div class="panel" ng-show="panel.isSelected(2)">
+			<h4>Specifications</h4>
+			<blockquote>None yet</blockquote>				
+		</div>	
+		<div class="panel" ng-show="panel.isSelected(3)">
+			<h4>Reviews</h4>
+			<blockquote>None yet</blockquote>				
+		</div>
+	</section>
+
+
+
+
 
