@@ -417,3 +417,38 @@ var gems = [
 		{{product.name}} 
 		<em class="pull-right"> {{product.price | currency}} </em>
 	</h3>
+
+/*** 4.4 directive controller ***/
+	//-- in html
+	<product-panels class="tab">
+	</product-panels>	
+
+	//--in js, directive controller
+	app.directive('productPanels',function(){
+		return {
+			restrict:'E',
+			templateUrl:'templates/product-panels.html',
+			
+			//move panel controller controller in directive, combine them together
+			controller: function(){
+				//init
+				this.tab = 1;
+				//select tab function
+				this.selectTab = function(setTab) {
+					this.tab =setTab;
+				};
+				//comparision method
+				this.isSelected = function(checkTab){
+					return this.tab === checkTab;
+				};
+			},
+			controllerAs:'panel'
+		};
+	});
+
+
+
+
+
+
+

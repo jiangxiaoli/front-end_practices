@@ -11,7 +11,8 @@
 		this.products = gems;
 	});
 
-	//controller panel
+	
+	/*//controller panel
 	app.controller('PanelController',function(){
 		//init
 		this.tab = 1;
@@ -23,13 +24,36 @@
 		this.isSelected = function(checkTab){
 			return this.tab === checkTab;
 		};
-	});
+	});*/
 
 	//custom directive
 	app.directive('productTitle', function(){
 		return {
 			restrict: 'E', //type of directive, E for element
-			templateUrl:'product-title.html'
+			templateUrl:'templates/product-title.html'
+		};
+	});
+
+	//directive controller - panels
+	app.directive('productPanels',function(){
+		return {
+			restrict:'E',
+			templateUrl:'templates/product-panels.html',
+			
+			//move panel controller controller in directive, combine them together
+			controller: function(){
+				//init
+				this.tab = 1;
+				//select tab function
+				this.selectTab = function(setTab) {
+					this.tab =setTab;
+				};
+				//comparision method
+				this.isSelected = function(checkTab){
+					return this.tab === checkTab;
+				};
+			},
+			controllerAs:'panel'
 		};
 	});
 
