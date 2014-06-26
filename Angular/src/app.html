@@ -30,8 +30,9 @@
 				<!--hide content only when soldOut is true-->
 				<div ng-hide="product.soldOut">
 
-					<h1> {{product.name}} </h1>
-					<h2 class="pull-right"> {{product.price | currency}} </h2>
+					<!-- product-title.html templates -->
+					<h1 ng-include src="'product-title.html'"> 
+					</h1>					
 					<p> {{product.description}} </p>
 					
 					<!--show images-->

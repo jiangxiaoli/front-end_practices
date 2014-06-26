@@ -348,7 +348,7 @@ var gems = [
 	.ng-valid.ng-dirty{
 		border-color:green;
 	}
-	
+
 //6. add createdOn date
 	//--in js
 		this.addReview = function(product){
@@ -369,6 +369,16 @@ var gems = [
 		</blockquote>				
 	</div>
 
+/*** Level 4 Custom directives ***/
+/*** 4.1 directives ***/
+//ng-include for templates
+	//-- in template: prodect-title.html
+	{{product.name}} 
+	<em class="pull-right"> {{product.price | currency}} </em>
 
+	//-- in app.html
+	//<!-- product-title.html templates -->
+	<h1 ng-include="'product-title.html'"> 
+	</h1>
 
 

@@ -1,3 +1,9 @@
+/*
+	Code school Angular tutorial
+	06-25 XJ
+*/
+
+/*form validation*/
 .ng-invalid.ng-dirty{
 	border-color:red;
 }
