@@ -25,6 +25,14 @@
 		};
 	});
 
+	//custom directive
+	app.directive('productTitle', function(){
+		return {
+			restrict: 'E', //type of directive, E for element
+			templateUrl:'product-title.html'
+		};
+	});
+
 	//controller review
 	app.controller('ReviewController', function(){
 		this.review = {};

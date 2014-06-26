@@ -370,7 +370,7 @@ var gems = [
 	</div>
 
 /*** Level 4 Custom directives ***/
-/*** 4.1 directives ***/
+/*** 4.1 directives - for expressive html ***/
 //ng-include for templates
 	//-- in template: prodect-title.html
 	{{product.name}} 
@@ -381,4 +381,39 @@ var gems = [
 	<h1 ng-include="'product-title.html'"> 
 	</h1>
 
+/*** 4.2 element directives ***/
+//build custom directives - element
+	//1. in html
+	<product-title></product-title>
+	//2. in js
+	//dash in html translate to camelCase in js
+	app.directive('productTitle', function(){
+		return {
+			restrict: 'E', //type of directive, E for element
+			templateUrl:'product-title.html'
+		};
+	});
 
+//Element directive & attribute directive
+	//element directive
+	<product-title></product-title>
+	//attribute directive - mixin behaviors, like tooltip
+	<h3 product-title></h3>
+
+/*** 4.3 attribute directives ***/
+//build custom directives - attribute
+	//1. in html
+	<h3 product-title></h3>
+	//2. in js
+	//dash in html translate to camelCase in js
+	app.directive('productTitle', function(){
+		return {
+			restrict: 'A', //type of directive, E for element
+			templateUrl:'product-title.html'
+		};
+	});
+	//3. in product-title.html
+	<h3>
+		{{product.name}} 
+		<em class="pull-right"> {{product.price | currency}} </em>
+	</h3>
