@@ -428,7 +428,7 @@ var gems = [
 		return {
 			restrict:'E',
 			templateUrl:'templates/product-panels.html',
-			
+
 			//move panel controller controller in directive, combine them together
 			controller: function(){
 				//init
@@ -446,9 +446,34 @@ var gems = [
 		};
 	});
 
+/*** Level 5 dependencies and services ***/
+//make a new module
+	//-- in product.js
+	//different closure means different app variable
+	(function(){
 
+		//define a new module just for product stuff
+		var app = angular.module('store-products', [ ]);
 
+		//custom directive
+		app.directive('productTitle', function(){...});
 
+		//directive controller - panels
+		app.directive('productPanels',function(){...});
 
+		//controller review
+		app.controller('ReviewController', function(){...});
+
+	})();
+//--in app.js
+    //put all product related directive and controller in product.js
+    //make dependencies
+    var app = angular.module('store',['store-products']);
+//-- in html
+	<script type="text/javascript" src="js/product.js"></script> 
+
+//make module organized
+//app.js - top-level module attached via ng-app
+//product.js -  all the functionality for products and only products
 
 
