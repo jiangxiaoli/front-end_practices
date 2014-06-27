@@ -447,7 +447,7 @@ var gems = [
 	});
 
 /*** Level 5 dependencies and services ***/
-//make a new module
+/*** 5.1 make a new module***/
 	//-- in product.js
 	//different closure means different app variable
 	(function(){
@@ -475,5 +475,58 @@ var gems = [
 //make module organized
 //app.js - top-level module attached via ng-app
 //product.js -  all the functionality for products and only products
+
+/*** 5.2 services ***/
+//service
+$http   //- fetching JSON data from web service
+$log    //- logging messages to the JS console
+$filter //- filter an array
+
+//$http service
+	//using $http as a function with an options object
+	$http({ method: 'GET', url: '/products.json'});
+	//using one of the shortcut methods
+	$http.get('/products.json', {apikey:'myApiKey'});
+//both return a Promise object with .success() and .error()
+//the result will be automatically decoded to JS objects and arrays
+
+//how to use
+//denpendency injection
+								//service name,    as an argument
+app.controller('SomeController', ['$http', function($http){
+
+}]);
+app.controller('SomeController', ['$http','$log', function($http, $log){
+
+}]);
+
+//-- in app.js
+	//1. controller store, add dependency injection
+	app.controller('StoreController', ['$http', function($http){
+		//this.products = gems;
+		//3. pass "this" to store
+		var store = this;
+		//5. initialize products to an array, since the page will render
+		//before data returns from get request 
+		store.products = [ ];
+
+		//2. $http returns a Promise, so success use callback to get the data
+		$http.get('/products.json').success(function(data){
+			//4. "this" is $http
+			store.products = data;
+		});
+	}]);
+//-- move gems data into products.json
+
+//additional $http functionalities
+	$http.post('/path/to/resource.json', { param: 'value'});
+	$http.delete('/path/to/resource.json');
+	//other using a config object
+	$http({ method: 'OPTIONS', url: '/path/to/resource.json'});
+	$http({ method: 'PATCH', url: '/path/to/resource.json'});
+	$http({ method: 'TRACE', url: '/path/to/resource.json'});
+
+
+
 
 

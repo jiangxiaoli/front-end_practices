@@ -7,11 +7,22 @@
 	var app = angular.module('store', ['store-products']);
 
 	//controller store	
-	app.controller('StoreController', function(){
-		this.products = gems;
-	});
+	app.controller('StoreController', ['$http', function($http){
+		//this.products = gems;
+		//pass "this" to store
+		var store = this;
+		//initialize products to an array, since the page will render
+		//before data returns from get request 
+		store.products = [ ];
 
-	var gems = [
+		//$http returns a Promise, so success use callback to get the data
+		$http.get('js/products.json').success(function(data){
+			//"this" is $http
+			store.products = data;
+		});
+	}]);
+
+	/***var gems = [
 		{
 			name: 'Apple',
 			price: 2.95,
@@ -55,6 +66,6 @@
 			images:[ ],
 			reviews:[ ]
 		},
-	];
+	];***/
 
 })();
