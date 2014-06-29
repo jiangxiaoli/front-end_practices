@@ -1,4 +1,6 @@
-front-end_practices
+Front-end practices
 ==================
 
-front-end language practice: HTML/CSS, JS, jQuery...
+> Front-end practice: 
+ - HTML/CSS, JS, jQuery
+ - Angular.js
