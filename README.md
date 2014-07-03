@@ -2,5 +2,7 @@ Front-end practices
 ==================
 
 > Front-end practice: 
- - HTML/CSS, JS, jQuery
+ - HTML/CSS
+ - JavaScript
+ - jQuery
  - Angular.js
