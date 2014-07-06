@@ -13,11 +13,31 @@ $(".confirmation").on("click","button",function(){
 	//$.ajax(url[, setings])
 		//relative URL
 	$.ajax("confirmation.html",{
+
 		//runs only when server returns a successful response
 		success: function(response) {
 			$(".ticket").html(response).slideDown();
 		},
-		data: {"confNum":$(".ticket").data("confNum")}
+
+        data: {"confNum":$(".ticket").data("confNum")},
+
+        //timeout, abort, or server error
+        error: function(request, errorType, errorMessage) {
+            console.log("Error:" + errorType + " with message: " + errorMessage);
+        },
+
+        //specify the timeout
+        timeout: 3000,
+
+        //runs before ajax request, for trigger loading string or spinner
+        beforeSend: function(){
+            $(".confirmation").addClass("is-loading");
+        },
+
+        //run after success and error
+        complete: function(){
+            $(".confirmation").removeClass("is-loading");
+        }
 
 	});
 
@@ -30,6 +50,8 @@ $(".confirmation").on("click","button",function(){
 
 
 //show boarding pass when link is clicked
-$(".confirmation .view-boarding-pass").on("click",function(){
-	$(this).closest(".ticket").find("img").show();
+    //event delegation
+$(".confirmation").on("click", ".view-boarding-pass", function(){
+	$(this).closest(".ticket").find("img").attr("src", "img/ticket.jpg");
 });
+
