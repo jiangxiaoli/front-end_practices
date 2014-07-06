@@ -81,4 +81,23 @@ $(".confirmation").on("click", ".view-boarding-pass", function(){
 
 /*** Ajax level 2 ***/
 //JS objects
+//in application.js file, the doc ready is too big, use js to organize the code
+//js object
+var confirmation = {
+    init: function(){
+        //event handlers
+        $(".confirmation").on("click","button", this.loadConfirmation);
+        $(".confirmation").on("click", ".view-boarding-pass", this.showBoardingPass());
+    },
 
+    //wrap method in event handlers
+    loadConfirmation: function(){
+        $.ajax("confirmation.html",{ });
+    },
+    showBoardingPass: function(){
+    }
+};
+
+$(document).ready(function(){
+    confirmation.init();
+});
