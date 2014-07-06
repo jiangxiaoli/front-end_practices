@@ -16,7 +16,8 @@ $(".confirmation").on("click","button",function(){
 		//runs only when server returns a successful response
 		success: function(response) {
 			$(".ticket").html(response).slideDown();
-		}
+		},
+		data: {"confNum":$(".ticket").data("confNum")}
 
 	});
 
