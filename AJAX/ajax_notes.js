@@ -68,9 +68,17 @@ $(".confirmation").on("click","button",function(){
         //timeout, abort, or server error
         error: function(request, errorType, errorMessage) {
             console.log("Error:" + errorType + " with message: " + errorMessage);
-        }
+        },
+        timeout: 3000
     });
 
 });
 
+//event delegation - delegate ".view-boading-pass", let it be heard anytime
+$(".confirmation").on("click", ".view-boarding-pass", function(){
+    $(this).closest(".ticket").find("img").attr("src", "img/ticket.jpg");
+});
+
+/*** Ajax level 2 ***/
+//JS objects
 
