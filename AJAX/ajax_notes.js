@@ -81,7 +81,7 @@ $(".confirmation").on("click", ".view-boarding-pass", function(){
 
 /*** Ajax level 2 ***/
 //JS objects
-//in application.js file, the doc ready is too big, use js to organize the code
+    //in application.js file, the doc ready is too big, use js to organize the code
 //js object
 var confirmation = {
     init: function(){
@@ -101,3 +101,56 @@ var confirmation = {
 $(document).ready(function(){
     confirmation.init();
 });
+
+//objects limited to 1 confirmation at a time
+//JS function - capitalized
+    function Vacation(destination){
+       //init vacation to destination
+    }
+
+    $(document).ready(function(){
+        //can have multiple vacations
+        var paris = new Vacation("Paris");
+        var london = new Vacation("London");
+    });
+
+//refactoring confirmation
+    function Confirmation(el){
+        this.el = el;
+
+        //target to ticket that was clicked
+        this.ticket = this.el.find(".ticket");
+
+        //helper method
+        this.loadConfirmation = function () {
+            $.ajax("confirmation.html",{
+                success: function(response) {
+                    //remove hard-code ".ticket"
+                    //$(".ticket").html(response).slideDown();
+                    this.ticket.html(response).slideDown();
+                }
+            });
+        }
+        this.showBoardingPass = function () {}
+
+        //event handler method
+        this.el.on("click","button", this.loadConfirmation);
+        this.el.on("click",".view-boarding-pass", this.showBoardingPass);
+    }
+
+    $(document).ready(function () {
+        //create a new confirmation for each ticket
+        var paris = new Confirmation($("#paris"));
+        var london = new Confirmation($("#london"));
+    })
+// not working- jqyery change the value of "this"
+    var confirmation = this;
+    $.ajax("confirmation.html",{
+        context:confirmation,
+        success: function(response) {
+            //this is not same in ajax, is ajax settings
+            this.el.find(".ticket").html(response).slideDown();
+        }
+    });
+
+//
