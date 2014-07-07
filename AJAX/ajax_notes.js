@@ -210,3 +210,32 @@ $(document).ready(function(){
         });
     });
 
+/*** Ajax level 4 Utility methods ***/
+
+//.each(collection, function(<index>, <object>){});
+    success: function(result){
+        $.each(result, function(index, city){
+            var favorite = $('.favorite-'+ index); //<div class='favorite-0'>
+            favorite.find('p').html(city.name);
+            favorite.find('img').attr('src',city.image);
+        });
+    }
+
+//$.map(collection, function(<item>, <index>){});
+//map returns an array modified by what is returned in the function passed as an argument
+    $.getJSON('/status', function (result) {
+        //store what returned from map
+        var statusElement = $.map(result, function(status, i){
+            var listItem= $('<li></li>');
+            $('<h3>'+status.name+'</h3>').appendTo(listItem);
+            $('<p>'+status.status+'</p>').appendTo(listItem);
+            return listItem;
+        });
+        $('.status-list').html(statusElement);
+    });
+
+//.detach() removes an element from the DOM, preserving all data and events.
+    //useful to minimize DOM insertions with multiple html elements
+    $('.status-list').detach()     //removes the list from DOM
+                     .html(statusElement)   //modified and reinserted into the status elements
+                     .appendTo('.status');

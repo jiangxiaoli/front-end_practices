@@ -100,4 +100,19 @@ $(document).ready(function(){
             contentType: "application/json"
         });
     });
+
+    $('.update-flights').on('click', function () {
+        console.log('in get time click');
+        $.getJSON('flights.html',function(result){
+            //console.log('in get json');
+            var flightElement = $.map(result, function(item, index){
+                //console.log('in map:' + index);
+                var flightEl= $('<li>'+item.flightNumber+'-'+item.time+'</li>');
+                return flightEl;
+            });
+            $('.flight-times').detach().html(flightElement).appendTo('.flights');
+        });
+
+    })
+
 });
