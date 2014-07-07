@@ -3,7 +3,7 @@
 	07/05 XJ
 */
 
-function Vacation(destination){
+/*function Vacation(destination){
     this.details = function(){
         console.log(destination);
     }
@@ -58,17 +58,11 @@ function Confirmation(el){
             success: function(response) {
                 //in ajax, this is not the same
                 this.ticket.html(response).slideDown();
-                console.log("in loadconf, this" + this);
-                console.log("in loadconf, this" + this.ticket);
             }
         });
     }
     this.showBoardingPass = function(event){
         event.preventDefault();
-        /*$(".view-boarding-pass").hide();
-        $(".boarding-pass").show();
-        console.log("this:" + this);
-        console.log(confirmation);*/
         $(this).hide();
         confirmation.el.find(".boarding-pass").show();
     }
@@ -80,10 +74,30 @@ function Confirmation(el){
 }
 
 $(document).ready(function(){
-    //confirmation.init();
-    var paris = new Confirmation($("#paris"));
-    //paris.details();
 
+    var paris = new Confirmation($("#paris"));
     var london = new Confirmation($("#london"));
-    //london.details();
+
+    $("form").on("submit", function(event) {
+        event.preventDefault();
+        var form = $(this);
+        //$.ajax("book.html", {
+        //same with the form action in html - DRY
+        $.ajax($("form").attr("action"),{
+            type: "POST",
+            data: form.serialize(),
+            dataType:"json",
+            success: function(result){
+                console.log("result"+result);
+                form.remove();
+
+                var msg= $("<p></p>");
+                msg.append("Destination" + result.location + ". ");
+                msg.append("Days" + result.quantity + ". ");
+
+                $("#vacation").hide().html(msg).fadeIn();
+            },
+            contentType: "application/json"
+        });
+    });
 });

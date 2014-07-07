@@ -4,7 +4,7 @@
   code school jQuery - AJAX
 */
 
-/*** Ajax level 1  ***/
+/*** Ajax level 1 Basic ***/
 //Ajax - Asynchronous JavaScript And XML
 
 //first ajax call
@@ -79,7 +79,7 @@ $(".confirmation").on("click", ".view-boarding-pass", function(){
     $(this).closest(".ticket").find("img").attr("src", "img/ticket.jpg");
 });
 
-/*** Ajax level 2 ***/
+/*** Ajax level 2 JS ***/
 //JS objects
     //in application.js file, the doc ready is too big, use js to organize the code
 //js object
@@ -153,4 +153,60 @@ $(document).ready(function(){
         }
     });
 
-//
+
+/*** Ajax level 3 Forms ***/
+//Forms
+    $("form").on("submit", function (event) {
+        //prevent browser from submitting
+        event.preventDefault();
+        $.ajax("/book", {
+            type: "POST",
+            //passing attributes from html
+            data: {"destination": $("#destination").val(), "quantity": $("#quantity").val()}
+            //better way: serialize() - merge all form fields for submission
+            data: $("form").serialize(),
+            success: function(result){
+                console.log(result);
+                $("form").remove();
+                $("#vacation").hide().html(result).fadeIn();
+            }
+        });
+    });
+    //improve form attribute
+    $("form").on("submit", function (event) {
+        event.preventDefault();
+        var form = $(this);
+        $.ajax("/book", {
+            type: "POST",
+            data: form.serialize(),
+            success: function(result){
+                form.remove();
+                $("#vacation").hide().html(result).fadeIn();
+            }
+        });
+    });
+
+//JSON - JS object notation
+    $("form").on("submit", function (event) {
+        event.preventDefault();
+        var form = $(this);
+        //$.ajax("/book", {
+        //same with the form action in html - DRY
+        $.ajax($("form").attr("action"),{
+            type: "POST",
+            data: form.serialize(),
+            dataType:"json", //parse the results as JSON
+            success: function(result){
+                form.remove();
+
+                var msg= $("<p></p>");
+                msg.append("Destination" + result.location + ". ")
+                    .append("Days" + result.quantity + ". ");
+
+                $("#vacation").hide().html(msg).fadeIn();
+            },
+            contentType: "application/json" //ask the server to respond with JSON
+
+        });
+    });
+
