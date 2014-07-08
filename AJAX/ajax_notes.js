@@ -239,3 +239,28 @@ $(document).ready(function(){
     $('.status-list').detach()     //removes the list from DOM
                      .html(statusElement)   //modified and reinserted into the status elements
                      .appendTo('.status');
+
+/*** Ajax level 5 jQuery plugins ***/
+//advanced events
+    //remove event handlers
+    function picture() {console.log('show plane');}
+    function status() {console.log('in service');}
+    function zoom() {console.log('zoom img');}
+    $('button').on('click', picture);
+    $('button').on('click', status);
+    //off(<event name>)- remove all the callbacks
+    $('button').off('click');
+
+    //namespacing events
+    $('button').on('click.image', picture);
+    $('button').on('click.details', status);
+    $('button').on('mouseover.image', zoom);
+
+    $('button').off('click.image');
+    $('button').off('.image');//remove all types of event handlers end in .image
+
+    //triggering events - will trigger the given event on the target
+    $('button').trigger('click');//similar to if the user clicked on the button
+    $('button').trigger('click.details');
+
+
