@@ -73,6 +73,31 @@ function Confirmation(el){
 
 }
 
+$.fn.priceify = function (options) {
+    //for each button event
+    this.each(function () {
+        var settings = $.extend({
+            days:3,
+            vacation: this,
+            price: $(this).data("price")
+        }, options);
+
+        var show = function () {
+            var details= $("<p>Book"+ settings.days +"  days for $"+( settings.days * settings.price)+"</p>");
+            $(this).hide();
+            settings.vacation.append(details);
+        };
+        settings.vacation.on("click.priceify","button", show);
+        settings.vacation.on("show.priceify", show); //custom event
+
+        var remove = function (){
+            settings.vacation.hide().off(".priceify"); //remove all *.priceify event handlers
+        };
+        settings.vacation.on("click.priceify",".remove-vacation", remove);
+
+    });
+};
+
 $(document).ready(function(){
 
     var paris = new Confirmation($("#paris"));
@@ -136,4 +161,9 @@ $(document).ready(function(){
         $(".vacation").trigger("show.price");
     });
 
+    $(".vacation").priceify();
+    $(".show-prices").on("click", function (event) {
+        event.preventDefault();
+        $(".vacation").trigger("show.priceify");//trigger an event on the vacation that the plugin watches for
+    });
 });

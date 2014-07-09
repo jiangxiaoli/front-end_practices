@@ -278,3 +278,64 @@ $(".vacation").trigger("show.price"); //trigger the showPrice for all vacations
 $(".vacation:last").trigger("show.price");//trigger the showPrice for single vacations
 
 //jquery plugins
+    //setting up a plugin
+$.fn.priceify = function () {
+    //for each button event
+    this.each(function () {
+        var vacation = this;
+        vacation.on("click.priceify","button", function () {});
+    });
+};
+$(".vacation").priceify();
+
+//plugin with parameters
+$.fn.priceify = function (options) {
+    //for each button event
+    this.each(function () {
+        var vacation = this;
+        vacation.on("click.priceify","button", function () {
+            var details= $("<p>Book"+ options.days +"  days for $"+( options.days * price)+"</p>");
+        });
+    });
+};
+$(".vacation").priceify({days:5});
+
+//utility $.extend will combine all objects
+    //$.extend(target[, object][, object])
+    $.extend({days:3},{price:5}); //{ days:3, price:5 }
+    $.extend({days:3},{});//{ days:3 }
+    $.extend({days:3},{days:5});//{ days:5 } - how to set default value
+
+$.fn.priceify = function (options) {
+    //for each button event
+    this.each(function () {
+        var settings = $.extend({
+            days:3,
+            vacation: this,
+            price: $(this).data("price")
+        }, options);
+
+        var show = function () {
+            var details= $("<p>Book"+ settings.days +"  days for $"+( settings.days * settings.price)+"</p>");
+            $(this).hide();
+            settings.vacation.append(details);
+        };
+        settings.vacation.on("click.priceify","button", show);
+        settings.vacation.on("show.priceify", show); //custom event
+    });
+};
+
+//call a plugin from outside
+$(".show-prices").on("click", function (event) {
+    event.preventDefault();
+    $(".vacation").trigger("show.priceify");//trigger an event on the vacation that the plugin watches for
+});
+
+//removing behavior of a plugin
+$.fn.priceify = function (options) {
+    //..
+    var remove = function (){
+        settings.vacation.hide().off(".priceify"); //remove all *.priceify event handlers
+    };
+    settings.vacation.on("click.priceify",".remove-vacation", remove);
+};
