@@ -263,4 +263,18 @@ $(document).ready(function(){
     $('button').trigger('click');//similar to if the user clicked on the button
     $('button').trigger('click.details');
 
+//event handling
+//$(<DOM element>).on("<event>.<namespace>", <method>)
+    $(".vacation").on("click.price", "button", showPrice); //<button>Show Price</button>
+    var showPrice = function () {
+        var vacation = $(this).closest(".vacation");
+        var price = vacation.data("price");
+        var details = $("<p>Book 3 days for $"+(3*price)+"</p>");
+        vacation.append(details);
+    };
+//custom <event> show.price
+$(".vacation").on("show.price", showPrice);
+$(".vacation").trigger("show.price"); //trigger the showPrice for all vacations
+$(".vacation:last").trigger("show.price");//trigger the showPrice for single vacations
 
+//jquery plugins

@@ -78,7 +78,7 @@ $(document).ready(function(){
     var paris = new Confirmation($("#paris"));
     var london = new Confirmation($("#london"));
 
-    $("form").on("submit", function(event) {
+    var submitFrom = function(event){
         event.preventDefault();
         var form = $(this);
         //$.ajax("book.html", {
@@ -99,9 +99,10 @@ $(document).ready(function(){
             },
             contentType: "application/json"
         });
-    });
+    };
 
-    $('.update-flights').on('click', function () {
+
+    var updateFlights = function(){
         console.log('in get time click');
         $.getJSON('flights.html',function(result){
             //console.log('in get json');
@@ -112,7 +113,27 @@ $(document).ready(function(){
             });
             $('.flight-times').detach().html(flightElement).appendTo('.flights');
         });
+    };
 
-    })
+    var showPrice = function () {
+        $(this).off(".price");
+        //$(".vacation").off("show.price");
+        var vacation = $(this).closest(".vacation");
+        var price = vacation.data("price");
+        var details = $("<p>Book 3 days for $"+(3*price)+"</p>");
+        vacation.append(details);
+    };
+
+    $("form").on("submit", submitFrom);
+
+    $('.update-flights').on('click', updateFlights);
+
+    $(".vacation").on("click.price", "button", showPrice);
+    $(".vacation").on("show.price", showPrice);
+
+    $(".show-prices").on("click", function(event){
+        event.preventDefault();
+        $(".vacation").trigger("show.price");
+    });
 
 });
