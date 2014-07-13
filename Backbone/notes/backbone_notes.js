@@ -107,3 +107,54 @@
 "sync"          //whenever successfully synced
 "error"         //when model save or validation failed
 "all"           //any triggered event
+
+/**************** 1-level 3 Views ******************/
+//more on the view element - setting the el element
+    var TodoView = Backbone.View.extend({
+        tagName: "article",
+        id: "todo-view",
+        className: "todo"
+    });
+    var todoView = new TodoView();
+    console.log(todoView.el); //<article id=‘todo-view’ class="todo"></article>
+
+//use a jQuery method
+    $(todoView.el).html();
+    todoView.$el.html(); //shortcut, good since the el's id may be dynamic
+
+//using a template
+var TodoView = Backbone.View.extend({
+    //underscore library
+    template: _.template("<h3><%= description %></h3>"),
+
+    render: function(){
+        var attributes = this.model.toJSON();
+        this.$el.html(this.template(attributes));
+    }
+});
+
+//adding view events
+var TodoView = Backbone.View.extend({
+    events: {
+      "click h3": "alertStatus"//"<event> <selector>":"<method>"
+    },
+
+    alertStatus: function(e){
+        alert("hey, you clicked h3!");//h3 is scoped to the el
+    },
+    somefunc: function(){
+        this.$el.delegate("h3","click",alertStatus);
+    }
+});
+
+//more events
+var TodoView = Backbone.View.extend({
+    events: {
+        "click h3": "alertStatus",//"<event> <selector>":"<method>"
+        "dbclick": "open",
+        "click .icon.doc":"select",
+        "mouseover .title .date":"showTooltip"
+    }
+});
+
+
