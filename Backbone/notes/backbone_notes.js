@@ -195,3 +195,59 @@ var TodoItem = Backbone.Model.extend({
         this.save(); //PUT /todos/1
     }
 });
+
+/**************** 1-level 5 collections ******************/
+//set of models
+var TodoList = Backbone.Collection.extend({
+    model: TodoItem
+});
+var todoList = new TodoList();
+
+todoList.length;//get number of models
+todoList.add(todoItem1);//add a model
+todoList.at(0); //get model instance at index 0
+todoList.get(1); // get by id 1
+todoList.remove(todoItem1); //remove a model instance
+
+//fetch data from server
+var TodoList = Backbone.Collection.extend({
+    url:"/todos"
+});
+todoList.fetch();// GET /todos
+
+//collection events - add, remove, reset
+todoList.on("reset", doThing);
+//event triggered on reset& fetch
+todoList.fetch();
+todoList.reset();
+//without notification
+todoList.fetch({silent:true});
+todoList.reset({silent:true});
+//remove event listener
+todoList.off("reset", doThing);
+//model events - change, change:<attr>, destroy, sync, error, all
+//events triggered on a model in a collection will also be triggered
+//on the collection
+
+todoList.on("add", function (todoItem) {
+    console.log(todoItem.get("description"));
+});
+
+//Iteration
+todoList.forEach(function (todoItem) {
+    alert(todoItem.get("description"));
+});
+//map- build an array of descriptions
+todoList.map(function (todoItem) {
+    return todoItem.get("description");
+});
+//filter
+todoList.filter(function () {
+   return todoItem.get("status")==="incomplete";
+});
+//others - provided by underscore library
+//forEach, reduce, reduceRight, find, filter, reject, every, all
+//some, include, invoke, max, min, sortBy, groupBy, sortedIndex
+//shuffle, toArray, size, first, initial, rest, last, without,
+//indexOf, lastIndexOf, isEmpty, chain
+
