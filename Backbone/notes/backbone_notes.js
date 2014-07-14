@@ -251,3 +251,163 @@ todoList.filter(function () {
 //shuffle, toArray, size, first, initial, rest, last, without,
 //indexOf, lastIndexOf, isEmpty, chain
 
+/**************** 1-level 6 Collections & Views ******************/
+var TodoListView = Backbone.View.extend({});
+var todoListView = new TodoListView({collection: todoList});
+
+//render each view, listening to add event
+    var TodoListView = Backbone.View.extend({
+
+        initialize: function () {
+            //listen to add event
+            this.collection.on("add", this.addOne, this);
+            //listen to reset event
+            this.collection.on("reset", this.addAll, this);
+        },
+        //add view to each model
+        render: function() {
+            //this.collection.forEach(this.addOne, this);//second "this", saves context
+            this.addAll();
+        },
+
+        addOne: function (todoItem) {
+            var todoView = new TodoView({model: todoItem});
+            this.$el.append(todoView.render().el);
+        },
+
+        addAll: function () {
+            this.collection.forEach(this.addOne, this);
+        }
+
+    });
+
+    var newTodoItem = new TodoItem({
+        description:"take out",
+        status:"incomplete"
+    });
+    todoList.add(newTodoItem);
+    todoList.fetch();
+
+//problem: remove item from collection, does not remove view
+//fix the problem with custom events
+    //in todoList collection
+    initialize: function() {
+        this.on("remove", this.hideModel);
+    },
+    hideModel: function(model) {
+        modeltrigger("hide");
+    }
+    //in todiItem View
+    initialize: function () {
+        this.model.on("hide", thie.remove, this);
+    }
+
+/**************** 1-level 7 Router & History ******************/
+//Router - map URLs to actions
+    var router = new Backbone.Router({
+        routes:{
+            "todos":"index", //url /todos #todos
+            "todos/:id":"show" //id - params
+        },
+
+        index: function () {},
+        show: function(){}
+    });
+
+//route matchers
+    "search/:query"          search/ruby         (query='ruby')
+    "search/:query/p:page"    search/ruby/p2      (query='ruby', page=2)
+    "folder/:name-:mode"      folder/foo-r        (name='foo', mode='r')
+    "file/*path"              file/hello/world.txt (path='hello/world.txt')
+        //wildcard matches everything after file/
+
+//triggering routes with navigating
+var router = new AppRouter();
+router.navigate("todos/1",{ trigger: true});
+
+//triggering routes
+    //hashbangs(#) for saving history - HTML5 pushState
+    Backbone.history.start({pushState: true}); //pushState on
+    router.navigate("todos/1"); //url /todos/1
+
+//define router class
+    var TodoRouter = Backbone.Router.extend({
+        routes:{
+            "":"index", //root - when hit back button
+            "todos/:id":"show" //id - params
+        },
+
+        index: function () {
+            this.todoList.fetch();
+        },
+        show: function(id){
+            //reset todoList collection to show only the todoItem with id
+            //get todoList form initialize
+            this.todoList.focusOnTodoItem(id);
+        },
+        initialize: function (options) {
+            //assign the todoList from options
+            this.todoList = options.todoList;
+        }
+    });
+
+//instance touter
+    var todoList = new TodoList();
+    var TodoApp = new TodoRouter({todoList: todoList});
+
+//app organization
+    var TodoApp = new (Backbone.Router.extend({
+        routes:{
+            "":"index", //root - when hit back button
+            "todos/:id":"show" //id - params
+        },
+        initialize: function () {
+            this.todoList = new TodoList();
+            this.todosView = new TodoListView({collection: this.todoList});
+            $("#app").append(this.todosView.el);
+        },
+        start: function(){
+            Backbone.history.start({pushStatus: true});
+        },
+        index: function () {
+            this.todoList.fetch();
+        },
+        show: function(id){
+            this.todoList.focusOnTodoItem(id);
+        }
+    }));
+
+//in $(document).ready()
+    $(function () {TodoApp.start()}); //start the whole app
+
+//other sample of app organization
+    var AppRouter = new (Backbone.Router.extend({
+        routes: { "appointments/:id": "show", "": "index" },
+
+        initialize: function(){
+            this.appointmentList = new AppointmentList();
+        },
+
+        start: function(){
+            Backbone.history.start({pushState: true});
+        },
+
+        index: function(){
+            var appointmentsView = new AppointmentListView({collection: this.appointmentList});
+            appointmentsView.render();
+            $('#app').html(appointmentsView.el);
+            this.appointmentList.fetch();
+        },
+
+        show: function(id){
+            var appointment = new Appointment({id: id});
+            var appointmentView = new AppointmentView({model: appointment});
+            appointmentView.render();
+            $('#app').html(appointmentView.el);
+            appointment.fetch();
+        }
+    }));
+
+    $(document).ready(function(){
+        $(function(){AppRouter.start()});
+    });
