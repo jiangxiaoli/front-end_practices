@@ -151,10 +151,47 @@ var TodoView = Backbone.View.extend({
 var TodoView = Backbone.View.extend({
     events: {
         "click h3": "alertStatus",//"<event> <selector>":"<method>"
-        "dbclick": "open",
+        "dblclick": "open",
         "click .icon.doc":"select",
         "mouseover .title .date":"showTooltip"
     }
 });
 
+/**************** 1-level 4 Models & Views ******************/
+//adding a checkbox - change the data from view to model
+ var TodoView = Backbone.View.extend({
+    template: _.template("<h3 class='<%= status %'>"+
+        "<% if(status === 'incomplete') print('checked') %>/>"+
+        "<%= description %></h3>"),
+    events:{
+        "change input": "toggleStatus"//listen to input
+    },
 
+    //listen to any model change, third "this" set to todoView, if not set to window
+    initialize:function(){
+        this.model.on("change", this.render, this);
+        this.model.on("destroy", this.remove, this);
+    },
+
+    toggleStatus: function(){
+        this.model.toggleStatus(); //connect to model
+    },
+
+    render: function () {
+        this.$el.(this.template(this.model.toJSON()));
+    },
+    remove:function(){
+        this.$el.remove();
+    }
+});
+
+var TodoItem = Backbone.Model.extend({
+    toggleStatus: function(){
+        if(this.get("status") === "incomplete" ){
+            this.set({"status": "complete"});
+        }else{
+            this.set({"status":"incomplete"});
+        }
+        this.save(); //PUT /todos/1
+    }
+});
