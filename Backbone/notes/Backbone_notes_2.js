@@ -70,3 +70,110 @@
         idAttribute: "_id"
     });
     todoItem.id; //ok
+
+/****************** 2-level 2 customizing collections ******************/
+//non-standard response
+//{
+//    "total": 25, "per_page":10, "page": 2,
+//    "todos" :[{"id":1},{"id":2}]
+//}
+
+var TodoItems = Backbone.Collection.extend({
+    parse: function (response) {
+        this.perPage = response.per_page; //call todoItems.perPage
+        this.page = response.page;
+        this.total = response.total;
+        return response.todos;
+    }
+});
+todoItems.toJSON(); //[{id:1, description:''...}]
+
+//fetch with extra params
+todoItems.fetch({data: {page : 6}}); //GET /todos?page=6
+appointments.fetch({data: {since: "2013-01-01", per_page: 10}});///appointments?since=2013-01-01&per_page=10
+
+//get next page
+todoItems.page //1
+todoItems.fetch({data:{page:todoItems.page + 1}}); //GET /todos?page=2
+
+//how to put next page link
+    // collection view
+    var TodosView = Backbone.View.extend({
+
+       //template for button
+        template: _.template('<a href="#/todos/p<$= page%>">next page</a>'),
+        //double params <a href="#/appointments/p<%= page %>/pp<%= per_page %>">
+
+        inithialize: function () {
+            this.collection.on("reset",this.render,this);
+        },
+        render: function () {
+            this.addAll();
+
+            //pass page attr
+            this.$el.append(this.template({page: this.collection.page +1}));
+            //double params this.template({page:this.collection.page + 1, per_page:this.collection.per_page }))
+
+            return this;
+        }
+    });
+    //in router
+    var TodoApp = new (Backbone.Router.extend({
+        routes: {
+            "todos/p:page":"page",//add page url
+            "":"index"
+        },
+
+        //add page func
+        page: function (page) {
+            this.todoItems.fetch({data: {page: page}});
+        },
+
+        initialize: function () {
+            this.todoItems = new TodoItems();
+            this.todosView = new TodosView({collection: this.todoItems});
+            this.todosView.render();
+            $("#app").append(this.todosView.el);
+        },
+        index: function () {
+            this.todoItems.fetch();
+        }
+    }));
+
+//sorting by comparator
+    var TodoItems = Backbone.Collection.extend({
+        comparator: "status"
+    });
+    todoItems.fetch(); //sort by status
+    //sort by function
+    var TodoItems = Backbone.Collection.extend({
+        comparator: function (todo1, todo2) {
+            return todo1.get("status") < todo2.get("status");//sort by status, reverse order
+        }
+    });
+
+//aggregate values
+var TodoItems = Backbone.Collection.extend({
+    completedCount: function () {
+        return this.where({status: "complete"}).length;//return filtered array of models
+    }
+});
+todoItems.completedCount();//get number 1
+
+    //double params
+    var AppointmentListView = Backbone.View.extend({
+        template: _.template('<a href="#/appointments/p<%= page %>/pp<%= per_page %>">View Next</a>'),
+        initialize: function(){
+            this.collection.on('reset', this.render, this);
+        },
+        render: function(){
+            this.$el.empty();
+            this.collection.forEach(this.addOne, this);
+            this.$el.append(this.template({page:this.collection.page + 1, per_page:this.collection.per_page }));
+        },
+        addOne: function(model){
+            var appointmentView = new AppointmentView({model: model});
+            appointmentView.render();
+            this.$el.append(appointmentView.el);
+        }
+    });
