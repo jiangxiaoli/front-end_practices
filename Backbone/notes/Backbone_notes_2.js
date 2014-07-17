@@ -177,3 +177,74 @@ todoItems.completedCount();//get number 1
             this.$el.append(appointmentView.el);
         }
     });
+
+/****************** 2-level 3 real routes ******************/
+//optional routes
+    var TodoRouter = new (Backbone.Router.extend({
+        routes: {
+            "search/:query(/p:page)(/)" : "search" //optional route part
+        },
+        search: function (query, page) {
+            page = page || 0;
+            console.log(query);
+            console.log(page);
+        }
+    }));
+    //call url
+    TodoRouter.navigate("search/milk",{trigger:true}); //"milk", 0
+    TodoRouter.navigate("search/milk/p2",{trigger:true}); //"milk", 2
+    TodoRouter.navigate("search/milk/p2/",{trigger:true}); //"milk", 2
+
+    //URI with space gotcha
+    TodoRouter.navigate("search/hello%20World/p2",{trigger:true});
+        search: function(query, page) {
+            page = page || 0;
+            query = decodeURIComponent(query);//decode
+            console.log(query);
+            console.log(page);
+        }
+
+//regex in routes
+    var TodoRouter = new (Backbone.Router.extend({
+        routes: {
+            "todos/id" : "show" //restrict params to numeric input
+        },
+        show: function (id) {
+            console.log("id=" + id);
+        }
+    }));
+
+    //put regex in Router
+    TodoRouter.route(/^todos\/(\d+)$/, "show"); //each regex capture group becomes a param
+    var TodoRouter = new (Backbone.Router.extend({
+        initialize:function() {
+            this.route(/^todos\/(\d+)$/, "show"); //restrict params to numeric input
+        },
+        show: function (id) {
+            console.log("id=" + id);
+        }
+    }));
+
+//catch-all routes
+    var TodoRouter = new (Backbone.Router.extend({
+        routes: {
+            "*path" : "notFound" //restrict params to numeric input
+        },
+        notFound: function () {
+            alert("sorry, there is nothing here.");
+        }
+    }));
+    TodoRouter.navigate("nothinghere",{trigger:true});
+
+//file path route
+    var TodoRouter = new (Backbone.Router.extend({
+        routes: {
+            "file/*path" : "file" //restrict params to numeric input
+        },
+        file: function (path) {
+            var parts = path.split("/");
+            console.log(parts);
+        }
+    }));
+    TodoRouter.navigate("file/this/is/a/file.txt",{trigger:true});
+                        //["this","is","a","file.txt"]
