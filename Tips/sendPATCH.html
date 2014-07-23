@@ -1,0 +1,39 @@
+# send PATCH and PUT HTTP request
+
+{% block content %}
+    <!-- Upload form. Note enctype attribute! -->
+    <form id="updateProfile" action="{% url 'photo:profile-detail' pk %}" method="POST" enctype="multipart/form-data"
+          class="form-horizontal">
+        <fieldset>
+            {% csrf_token %}
+          
+            <div class="control-group ">
+                <label for="career" class="control-label">career:</label>
+                <div class="controls">
+                    <input name="career" type="text" value="{{ profile.career }}">
+                </div>
+            </div>
+
+            </br>
+            <div class="form-actions">
+                <button class="btn btn-primary js-tooltip" name="_method" value="PATCH"
+                        data-original-title="Make a PATCH request on the Profile Detail resource">UPDATE
+                </button>
+            </div>
+
+            <input type="hidden" name="_method" value="PATCH" />
+        </fieldset>
+    </form>
+{% endblock %}
+
+{% block foot_script %}
+<script>
+    $(document).ready(function(){
+        user_url = "{% url 'photo:user_page' 1 %}";
+        user_url = user_url.substring(0, user_url.length - 2);
+        $('#updateProfile').ajaxForm(function() {
+            window.location.replace(user_url+{{ user.id }});
+        });
+    });
+</script>
+{% endblock %}
