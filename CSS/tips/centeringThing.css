@@ -1,0 +1,35 @@
+/*
+http://www.w3.org/Style/Examples/007/center.en.html
+*/
+
+//text
+P { text-align: center }
+H2 { text-align: center }
+
+
+//block
+P.blocktext {
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em
+}
+...
+<P class="blocktext">This rather...
+
+//img
+IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+
+<IMG class="displayed" src="..." alt="...">
+
+//centering verticaly
+DIV.container {
+    min-height: 10em;
+    display: table-cell;
+    vertical-align: middle }
+...
+<DIV class="container">
+  <P>This small paragraph...
+</DIV>
