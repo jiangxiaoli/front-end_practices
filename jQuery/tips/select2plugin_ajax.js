@@ -28,7 +28,7 @@
     if (data != null) {
         $.each(data.merchants, function (i, item) {
             //add merchant name in the select array
-            selectMerchantArray.push({id:i, name: item.name});
+            selectMerchantArray.push({id:item.id, name: item.name});
         });
     }
   }
@@ -44,6 +44,13 @@ $(document).ready(function(){
       data:{ results: selectMerchantArray, text: 'name' },
       formatSelection: format,
       formatResult: format
+  });
+  
+  
+    //listent to form input change event
+  $('#e10').change(function() {
+      var merchant_id = $(this).val(); // get the current value of the input field. - the id from elect2 array
+      console.log("input val: " + merchant_id);
   });
   
 });
