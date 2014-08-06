@@ -38,13 +38,14 @@ $.getJSON(all_merchant_url, function (data) {
     var selected = [];
 
     $('#store_table').dataTable( {
-        "sDom": 'T<"clear">lfrtip',
         
-        //define the select buttons
-        "oTableTools ": {
-            "aButtons ": [
-                "select_all ",
-                "select_none ",
+        //select buttons - must include dataTables.tableTools.js
+        dom: 'T<"clear ">lfrtip',
+        tableTools: {
+            "sRowSelect": "multi",
+            "aButtons": [
+                "select_all",
+                "select_none",
                 {
                     "sExtends":    "select",
                     "sButtonText": "Select Filtered",
