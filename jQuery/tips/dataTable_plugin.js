@@ -101,3 +101,20 @@ $.getJSON(all_merchant_url, function (data) {
 
     });
 });
+
+//Warning: Cannot reinitialise Data issue
+var table;
+var loadTableOnce = false;
+
+//click the button to send ajax call and load the form, could change and reload
+$("#add_store_btn").click(function () {
+
+    if(loadTableOnce){
+        table.destroy();
+    }
+    
+    loadTableOnce = true;
+    
+    table = $('#store_table').DataTable( {});
+});
+
