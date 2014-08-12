@@ -1,7 +1,8 @@
 Plugins
 =================
 
-> bootstrap-wysihtml5  
+> bootstrap-wysihtml5
+  - http://jhollingworth.github.io/bootstrap-wysihtml5/
   - for Simple, beautiful wysiwyg editors
 
 > bootstrap-colorpicker.js
