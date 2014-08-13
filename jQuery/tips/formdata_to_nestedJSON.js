@@ -1,3 +1,6 @@
+//http://stackoverflow.com/questions/23368145/jquery-add-and-remove-fields-dynamically-how-to-do-it-without-repeating-code?answertab=active#tab-top
+
+
 //to initialize the plugins (datetimepicker, etc) for added input group
 function initializeThings(){
   $('.autosize').autosize();      
