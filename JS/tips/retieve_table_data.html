@@ -1,3 +1,52 @@
+<!-- for table with input as innerHTML of td--->
+<table id="table_description_cn" class="table" style="width:95%;background-color: #ffffff; border: 1px grey solid">
+    <thead>
+        <tr>
+            <th>text</th>
+            <th>color</th>
+        </tr>
+
+    </thead>
+    <tbody id="desc_inputs_cn">
+        <tr>
+            <input type="hidden" name="coupon.desc_cn[0].id" value="0" />
+            <td><input type="text" name="coupon.desc_cn[0].text" value="1. 测试" /></td>
+            <td><input type="text" name="coupon.desc_cn[0].color" value="#ff9900" /></td>
+        </tr>
+    </tbody>
+
+</table>
+
+<script>
+    //binding the desc preview with table data
+    $('#table_description_cn tbody tr').map(function() {
+        // $(this) is used more than once; cache it for performance.
+        var $row = $(this);
+    
+        var text1 =$row.find(':nth-child(2)').find("input").val();
+        console.log("data cn1: " + text1);
+    
+    
+        var text2 =$row.find(':nth-child(3)').find("input").val();
+    
+        console.log("data cn2: " + text2);
+    
+    
+    
+        // For each row that's "mapped", return an object that
+        //  describes the first and second <td> in the row.
+        return {
+        id: $row.find(':nth-child(1)').text(),
+        text: $row.find(':nth-child(2)').text()
+        };
+    }).get();
+    
+    
+</script>
+
+
+
+
 <table id="myTable">
     <tr>
         <td>A1</td>
