@@ -1,0 +1,24 @@
+/*
+<div class="thumbnail">
+  <img src="" alt="..." width="150" />
+  <div class="caption post-content">
+
+    <h3>Robots!</h3>
+    <p>Lorem ipsum dolor sit amet</p> 
+
+  </div>
+</div>
+*/
+
+.post-content {
+    background: none repeat scroll 0 0 #FFFFFF;
+    opacity: 0.5;
+    top:0;
+    left:0;
+    position: absolute;
+}
+
+.thumbnail{
+    position:relative;
+    
+}
