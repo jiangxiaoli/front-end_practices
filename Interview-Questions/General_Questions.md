@@ -3,11 +3,20 @@ some from https://github.com/darcyclarke/Front-end-Developer-Interview-Questions
 #### General Questions:
 
 * If you have 5 different stylesheets, how would you best integrate them into the site?
-  * File concatenation
+  * <b>File concatenation</b>
+    * Reduce the number of HTTP requests by combining the Javascript and CSS into single files. 
+  * In addition those files should be minimized
   
-* Can you describe the difference between progressive enhancement and graceful degradation?
-  * Bonus points for describing feature detection
-  
+* Can you describe the difference between progressive enhancement and graceful degradation? Bonus points for describing feature detection
+  * <b>progressive enhancement</b>
+    * Start by establishing a basic level of user experience that all browsers will be able to provide 
+    * Also build in more advanced functionality that will automatically be available to browsers that can use it
+    * means looking forward, is quite nice if you have the time
+  * <b>graceful degradation</b>
+    * building your web functionality so that it provides a certain level of user experience in more modern browsers
+    * it will also degrade gracefully to a lower level of user in experience in older browsers
+    * Degrading gracefully means looking back, and is often <b>necessary</b>
+
 * How would you optimize a websites assets/resources?
   * Looking for a number of solutions which can include:
     * File concatenation
