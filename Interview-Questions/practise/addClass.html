@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Add Class Demo</title>
+</head>
+<body>
+	<h3>Add Class Demo</h3>
+	
+	<div id="toadd" class="1">I am the div to add class, i have </div>
+
+	Input classes to add, sepearte with ",""
+	<input id="add_classes" type="text" name="class">
+	<button id="add_btn" onclick="addClass()">Add Class</button>
+	
+
+	<script>
+	function addClass(){
+
+		//get the classes to be added
+		var add_classes = document.getElementById("add_classes").value.split(",");
+		console.log(add_classes);
+
+		//get target el
+		var addEl = document.getElementById("toadd");
+
+		for(var i = 0; i < add_classes.length; i++){
+			console.log(add_classes[i]);
+
+			//check if the el already contains the to be add class
+			if((" "+ addEl.className + " ").indexOf(" " + add_classes[i]+" ") === -1){
+				//add class to the el
+				addEl.className += " " + add_classes[i];
+			}
+			
+		}
+
+		addEl.innerHTML = "Now I have classes: "+ addEl.className;
+	}
+
+	</script>
+</body>
+</html>
