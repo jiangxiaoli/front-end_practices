@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Check Descendant Demo</title>
+</head>
+<body>
+
+	<h3>Check Descendant Demo</h3>
+
+	<div id="parent1">
+		parent1
+		<p id="c11">c11 First Child</p>
+		<p id="c12">c12 Second Child</p>
+		<p id="c13">c13 Third Child</p>
+	</div>
+
+	<div id="parent2">
+		parent2
+		<p id="c21">c21 First Child</p>
+		<p id="c22">c22 Second Child</p>
+		<div id="parent22">
+			<p id="c23">c23 Third Child</p>
+		</div>
+		
+	</div>
+
+	<div>
+		<input id="descEl" type="text" placeholder="input descendant el id">
+		<input id="parentEl" type="text" placeholder="input parent el id">
+	</div>
+	
+	<button id="checkChild" onclick="checkChild()">Check Child</button>
+
+	<div id="result"></div>
+
+	<script>
+	function checkChild(){
+
+		var descElId = document.getElementById("descEl").value;
+		var descEl = document.getElementById(descElId);
+
+		var parentElId = document.getElementById("parentEl").value;
+		var parentEl = document.getElementById(parentElId);
+
+		var parentNode = descEl.parentNode;
+
+		var isChild = false;
+
+		while(parentNode !== document.body){
+			if(parentNode === parentEl){
+				isChild = true;
+				break;
+			}
+			parentNode = parentNode.parentNode;
+		}
+
+		if(isChild){
+			document.getElementById("result").innerHTML = descElId +" is the child of " + parentElId;
+		} else {
+			document.getElementById("result").innerHTML = descElId +" is NOT the child of " + parentElId;
+		}
+
+	}
+
+	</script>
+
+	
+</body>
+</html>
