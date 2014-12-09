@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dynamic Tooltip</title>
+
+
+	<style>
+	#tooltip {
+		display: none;
+		border: solid 1px #eee;
+	}
+			
+	</style>
+
+</head>
+<body>
+
+	<h3>Dynamic Tooltip Demo</h3>
+
+	<a id="myplace" href="">My Place</a>
+	<div id="tooltip">
+		dynamic tooltip with text!
+	</div>
+
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script>
+		$(ducoment).ready(function(){
+			$("myplace").on("hover", function(){
+				$("#tooltip").show();
+			});
+			$("myplace").on("hover", function(){
+				$("#tooltip").hide();
+			});
+		});
+
+	</script>
+</body>
+</html>

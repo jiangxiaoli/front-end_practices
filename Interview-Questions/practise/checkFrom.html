@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Check Form Demo</title>
+</head>
+<body>
+	<h3>Check Form Demo</h3>
+	<form id="form1" action="" method="POST">
+		<input type="text" name="text1">
+		<input type="checkbox" name="check" value="1">check1
+		<input type="checkbox" name="check" value="2">check2
+		<input type="checkbox" name="check" value="3">check3
+		<input type="checkbox" name="check" value="4">check4
+		<br>
+		<input type="radio" name="radiocheck" value="1">yes
+		<input type="radio" name="radiocheck" value="0">no
+
+		<input type="submit" value="Submit and Check Form">
+
+
+	</form>
+
+
+
+<script>
+	var form1 = document.getElementById("form1");
+
+	//listen to form submit event
+	form1.addEventListener("submit", function(){
+		
+		
+		var inputs = document.getElementsByTagName("input");
+		var checkval = form1.elements.namedItem("check").value;
+		console.log("checked val: "+ checkval);
+
+		var counter = 0;
+		var formEmpty = true;
+
+		for(var i=0; i<inputs.length; i++){
+
+			//check if more than 2 checkboxes are checked
+			if(inputs[i].type === "checkbox"){
+				if(inputs[i].checked){
+					counter++;
+				}
+			}
+
+			//check the value of radio button
+			if(inputs[i].type === "radio"){
+				if(inputs[i].checked){
+					console.log("radio button select: " + inputs[i].value);
+				}
+			}
+
+			//check form is empty, not working....
+			console.log(inputs[i].value);
+			if(inputs[i].value){
+				formEmpty=true;
+			}
+
+		}
+
+		if(formEmpty){
+			console.log("form is empty!!!!");
+		} else {
+			if(counter>=2){
+				console.log("form submit!");
+			} else {
+				console.log("Please check at least 2 boxes!");
+			}
+		}
+		
+
+	});
+</script>
+</body>
+</html>
