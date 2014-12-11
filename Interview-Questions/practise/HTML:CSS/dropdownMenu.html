@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+
+	<style>
+		/*dropdown menu*/
+
+		.menu > li {
+			position: relative;
+			display: inline-block;
+		}
+
+		.sub-menu{
+			position: absolute;
+			top:100%;
+			left:0;
+			display: none;
+		}
+
+		/*hover to show submenu*/
+		.menu li:hover .sub-menu {
+			display: block;
+		}
+
+	</style>
+
+</head>
+<body>
+	<nav>
+		<ul class="menu"> 
+			<li>menu1</li>
+			<li>menu2</li>
+			<li>menu3
+				<ul class="sub-menu"> 
+					<li>sub1</li>
+					<li>sub2</li>
+				</ul>
+			</li>
+			
+		</ul>
+		
+	</nav>
+
+</body>
+</html>

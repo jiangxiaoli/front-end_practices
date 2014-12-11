@@ -15,21 +15,39 @@
 		<br>
 		<input type="radio" name="radiocheck" value="1">yes
 		<input type="radio" name="radiocheck" value="0">no
-
 		<input type="submit" value="Submit and Check Form">
-
-
+	</form>
+	
+	<!-- empty validation  -->
+	<form name="myForm" action="demo_form.asp" onsubmit="return validateForm()" method="post">
+		First name: <input type="text" name="fname">
+		<input type="submit" value="Submit">
 	</form>
 
+<script>
+	//form validation
+	function validateForm() {
+    
+    var x = document.forms["myForm"]["fname"].value;
+    //get x, another way
+	var x = document.myForm.fname.value;
 
+    if (x == null || x == "") {
+        alert("First name must be filled out");
+        return false;
+    }
+}
+
+</script>
 
 <script>
+		
 	var form1 = document.getElementById("form1");
 
 	//listen to form submit event
 	form1.addEventListener("submit", function(){
 		
-		
+		//get all input elements
 		var inputs = document.getElementsByTagName("input");
 		var checkval = form1.elements.namedItem("check").value;
 		console.log("checked val: "+ checkval);
@@ -70,9 +88,23 @@
 				console.log("Please check at least 2 boxes!");
 			}
 		}
-		
-
 	});
 </script>
+
+<script>
+	//jQuery enable form check
+	$(".form-payment-methods input[type='radio']").on("change", function(){
+		var $formInputs = $(".form-card-fields input, .form-card-fields select");
+		var $formLabels = $(".form-card-fields label");
+		if($("#cash").is(":checked")){
+			$formInputs.attr("disabled", true);
+			$formLabels.addClass("is-disabled");
+		} else {
+			$formInputs.attr("disabled", false);
+			$formLabels.remove("is-disabled");
+		}
+	});
+</script>
+
 </body>
 </html>

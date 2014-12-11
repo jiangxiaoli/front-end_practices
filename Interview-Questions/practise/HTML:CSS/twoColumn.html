@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Two Column</title>
+	<style>
+		#container {
+		    margin:20px auto;
+		    background-color: blue;
+		}
+
+		#left {
+		    float:left;
+		    width:185px;
+		    margin-right: -185px;
+		    background-color: red;
+		}
+
+		#right {
+		    margin-left: 185px;
+		    background-color: green;
+		}
+
+		/*#right {
+		    float:left;
+		    background-color: green;
+		}
+*/
+		#footer {
+		    clear:both;
+		    background-color: blue;
+		}
+
+		.twoColumn{
+			column-count:2;
+			-webkit-column-count: 2;
+		}
+
+		.column {
+			border: solid 1px red;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="container">
+	    <div id="header">
+	        header content here
+	    </div>
+	    
+	    <div id="left">
+	        main content here
+	    </div>
+	    
+	    <div id="right">
+	        sidebar content here
+	    </div>
+	    
+	    <div id="footer">
+	        footer content here
+	    </div>
+	</div>
+
+	<div class="twoColumn">
+		<div class="column">column1</div>
+		<div class="column">column2</div>
+	</div>
+</body>
+</html>

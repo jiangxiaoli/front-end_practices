@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>:nth-child</title>
+	<style>
+
+		/* 
+		:nth-child(1) - first
+		:nth-child(even); even or odd
+		:nth-child(3n);  select 3,6,9,12
+		:nth-child(-n+4); select first 4 
+		:nth-child(n+5); select every but first 4, 5 like offset
+
+		:nth-last-child();
+		 */
+
+		li:nth-child(3n){
+			color:red;
+		}
+
+		li:first-child{
+			/*color: red;*/
+		}
+
+		li:last-child {
+			/*color:red;*/
+		}
+
+		/* 
+		:first-of-type, :last-of-type
+		:nth-of-type
+		*/
+		section p:first-of-type {
+			color:red;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>:nth-child examples</h1>
+
+	<!-- ul>li{list item $@}*12 -->
+	<ul>
+		<li>list item 1</li>
+		<li>list item 2</li>
+		<li>list item 3</li>
+		<li>list item 4</li>
+		<li>list item 5</li>
+		<li>list item 6</li>
+		<li>list item 7</li>
+		<li>list item 8</li>
+		<li>list item 9</li>
+		<li>list item 10</li>
+		<li>list item 11</li>
+		<li>list item 12</li>
+	</ul>
+
+	<section>
+		<h1>sec1</h1>
+		<p>p1</p>
+		<p>p2</p>
+	</section>
+
+</body>
+</html>

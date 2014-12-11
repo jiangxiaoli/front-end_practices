@@ -1,6 +1,7 @@
+//0,1,1,2,3,5,8...
+
 function fibonacci(n){
 	var fib = [];
-	var last = 0;
 	
 	//put the first two el in fib array
 	fib.push(0);

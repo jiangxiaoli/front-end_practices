@@ -45,8 +45,10 @@
 
 		var parentNode = descEl.parentNode;
 
+		/*key part*/
 		var isChild = false;
 
+		//loop until find the root parent object
 		while(parentNode !== document.body){
 			if(parentNode === parentEl){
 				isChild = true;
@@ -61,6 +63,22 @@
 			document.getElementById("result").innerHTML = descElId +" is NOT the child of " + parentElId;
 		}
 
+	}
+
+	//js function
+	function isChild(descID, parentID){
+		var descEl = document.getElementById(descID);
+		var parentEl = document.getElementById(parentID);
+
+		//parent node checker
+		var pNode = descEl.parentNode;
+		while(pNode !== document.body){
+			if(pNode == parentEl){
+				return true;
+			}
+			pNode = pNode.parentNode; //for further parent
+		}
+		return false;
 	}
 
 	</script>

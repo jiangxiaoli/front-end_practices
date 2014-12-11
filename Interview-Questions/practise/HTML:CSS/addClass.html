@@ -38,6 +38,28 @@
 		addEl.innerHTML = "Now I have classes: "+ addEl.className;
 	}
 
+	//just js
+	function addClass2(id, classes){
+		var el = document.getElementById(id);
+		var cls = classes.split(",");
+
+		//counter 
+		var n = 0;
+
+		for(var i =0; i<cls.length; i++){
+			//check if el.className contains cls[i]
+			if((el.className).indexOf(cls[i]) === -1){
+				el.className += " " + cls[i];
+
+				//counter++
+				n++;
+			}
+		}
+		return el.className;
+		//return n
+	}
+
+
 	</script>
 </body>
 </html>

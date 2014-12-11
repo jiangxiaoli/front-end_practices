@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sibling</title>
+	<style>
+
+	/*CSS combinators*/
+	
+	/* descendant selector */
+	div p {
+		/*background-color: red;*/
+	}
+
+	/*child selecor immedite*/
+	div > p {
+		/*background-color: red;*/
+	}
+
+	/* decendent ofchild selecor immedite*/
+	div * p {
+		background-color: red;
+	}
+
+	/*adjacent sibling immedite*/
+	div + p {
+		/*background-color: red;*/
+	}
+
+	/*general sibling selecor immedite*/
+	div ~ p {
+		/*background-color: red;*/
+	}
+
+	</style>
+</head>
+<body>
+	<p>out p1</p>
+	<div>
+		<p>in p1-1</p>
+		<section>
+			<p>in p2-1</p>
+			<p>in p2-2</p>
+		</section>
+	</div>
+	<p>out p2</p>
+	<p>out p3</p>
+	
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Float</title>
+	<style>
+		.box{
+			box-sizing:border-box;
+			width: 20%%;
+			height:100px;
+			line-height: 100px; /*hight align text*/
+			text-align: center;
+			background-color: gray;
+		}
+
+		.box1, .box2, .box3
+		{
+			float: left;
+			border: solid 1px red;
+		}
+
+		
+		.threeC {
+			background-color: green;
+			/*overflow: hidden;  fix float parent container collapse */
+		}
+
+		/* more robostic way sudo elements .clearfix:before, after*/
+		.clearfix:before,
+		.clearfix:after {
+			content:" ";
+			display: table;
+		}
+
+		.clearfix:after {
+			clear:both;
+		}
+
+	</style>
+</head>
+
+<body>
+	<h3>Float demo</h3>
+
+	<div class="threeC clearfix"> 
+		<div class="box box1">1</div>
+		<div class="box box2">2</div>
+		<div class="box box3">3</div>
+	</div>
+	
+	
+</body>
+</html>

@@ -30,20 +30,21 @@ function transfromJSON(jarr){
 
 	for(var i = 0; i<jarr.length; i++){
 
+		//check if name is already contains in result list
 		if (contains(result,jarr[i].name) === -1) {
-
+			//build new obj
 			var obj = {
 				"name": jarr[i].name,
 				"details": [{"language": jarr[i].language, "year":jarr[i].year}]
 			};
 			result.push(obj);
-
 		} else {
 			var index = contains(result,jarr[i].name);
 			//console.log(result[index]);
+
+			//build new data in subarray
 			result[index].details.push({"language": jarr[i].language, "year":jarr[i].year});
 		}
-
 	}
 	return result;
 }

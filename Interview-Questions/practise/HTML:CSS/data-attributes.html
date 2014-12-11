@@ -1,0 +1,47 @@
+<!-- 
+
+http://www.sitepoint.com/use-html5-data-attributes/ 
+
+are strings — you can store anything which can be string encoded, such as JSON. 
+should only be used when no suitable HTML5 element or attribute exists.
+are private to the page. Unlike microformats, they should be ignored by external systems such as search engine indexing bots.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Data attributes</title>
+</head>
+<body>
+
+	<div id="msglist" data-user="bob" data-list-size="5" data-maxage="180">
+		Test
+	</div>
+
+	<script>
+		//parsing #1: getAttribute, setAttribute
+		var msglist = document.getElementById("msglist");
+ 
+		var show = msglist.getAttribute("data-list-size");
+		msglist.setAttribute("data-list-size", show+3);
+
+		//parsing #2 jQuery data() method
+		var msglist = $("#msglist");
+ 
+		var show = msglist.data("list-size");
+		msglist.data("list-size", show+3);
+
+
+		//parsing #3 the dataset API, dataset.listSize
+		var msglist = document.getElementById("msglist");
+ 
+		var show = msglist.dataset.listSize; //removing hyphens and converting to camelCase
+		msglist.dataset.listSize = show+3;
+
+
+	</script>
+	
+</body>
+</html>
