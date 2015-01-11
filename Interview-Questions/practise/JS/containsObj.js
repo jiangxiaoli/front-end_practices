@@ -37,6 +37,22 @@ var contains = function(obj, prop){
 	return false;
 }
 
+////////
+function JSObjContains ( parentJSObj, candidateJSObj ) {
+    for(var prop in parentJSObj){
+    
+        var checkObj = parentJSObj[prop];
+        
+        if (checkObj == candidateJSObj) 
+            return true;
+        
+        if (checkObj!=null && typeof(checkObj)=='object') //check if prop is object
+            if(JSObjContains(checkObj, candidateJSObj)) 
+                return true;
+    }
+    return false;
+}
+
 
 console.log(contains(test, 'prop'));   // returns true
 changeO();

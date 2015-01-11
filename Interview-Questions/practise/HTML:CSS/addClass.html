@@ -48,8 +48,8 @@
 
 		for(var i =0; i<cls.length; i++){
 			//check if el.className contains cls[i]
-			if((el.className).indexOf(cls[i]) === -1){
-				el.className += " " + cls[i];
+			if((el.className).indexOf(cls[i].trim()) === -1){
+				el.className += " " + cls[i]; //remember " "
 
 				//counter++
 				n++;

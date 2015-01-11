@@ -96,7 +96,7 @@
 	$(".form-payment-methods input[type='radio']").on("change", function(){
 		var $formInputs = $(".form-card-fields input, .form-card-fields select");
 		var $formLabels = $(".form-card-fields label");
-		if($("#cash").is(":checked")){
+		if($("#cash").is(":checked")){ //is(":ischecked")
 			$formInputs.attr("disabled", true);
 			$formLabels.addClass("is-disabled");
 		} else {
