@@ -1,0 +1,132 @@
+<!-- 
+
+CMPE 280 assignment - Mark and Auto Complete
+Xiaoli Jiang 
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CMPE 280 Mark and Auto Complete</title>
+	<style>
+		.content {
+			border: solid 1px grey;
+			margin: 5px;
+			padding: 20px;
+		}
+		.center {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="center">
+		<h2>CMPE 280 assignment - Mark and Auto Complete</h2>
+		<h3 style="color: blue">Xiaoli Jiang 009390901</h3>
+	</div>
+	
+	<!-- mark -->
+	<div class="content">
+		<h3>Mark</h3>
+		<p>
+			The stock quardrupled just a few months after its IPO, as investors have high expectations for the company to live up to. However, investors are especially antsy going into this report, seeing how the stock has lost more than half its value in the last few month alone.
+		</p>
+		<p>
+			Revenues passed by expectations by a long shot. GoPro pasted revenues of <span class="mark"/>$633.39 million,</span> compared to our consensus estimate of <span class="mark">$565 million.</span>
+		</p>
+	</div>
+
+	<!-- auto complete -->
+	<div class="content">
+		<h3>Auto Complete Search</h3>
+		<form name="autoFrom">
+			<label><input type="radio" name="type" id="book" value="book">  Book List</label>
+			<label><input type="radio" name="type" id="scientists" value="scientists">  Famous Scientists</label>
+			<br>
+			<input type="text" name="input_text" size="64" id="input_text">
+			<input type="submit" value="search">
+			<br>
+			<!-- dropdown select bar -->
+			<select id="dropdown_select" style="width: 350px" ></select>
+		</form>
+	</div>
+
+	<script>
+		//1. mark with js control of background color
+		var marks = document.getElementsByClassName("mark");
+		for (var i = 0; i < marks.length; i++) {
+			marks[i].style.backgroundColor = "yellow";
+		};
+
+		//2. auto complete
+		//listen to change event on choosing type
+		var rad = document.autoFrom.type;
+		var select_type = null;
+		for(var i = 0; i < rad.length; i++) {
+		    rad[i].onclick = function() {
+	            select_type = this.value; //save list type
+	            input_text.value = "";//clean the input field
+	            dropdowon_list.style.display = 'none'; //hide dropdown
+		    };
+		}
+
+		//build select drop-down list
+		//listen to change event in text input
+		var input_text = document.autoFrom.input_text;
+		var dropdowon_list = document.getElementById("dropdown_select");
+		dropdowon_list.style.display = 'none'; //hide dropdown
+
+		//listen to input text event
+		input_text.onkeyup = function() {
+
+			if(select_type == null) {
+				input_text.value = "";
+				alert("Please select search type first");
+			} else {
+
+				var result_list = [];
+
+				//match input text with option list
+				if(select_type == "book") 
+					result_list = search_list(this.value, booklist);
+				if(select_type == "scientists") 
+					result_list = search_list(this.value, scientistslist);
+
+				//append result_list to dropdowon
+				var html_list = "";
+				for(var i = 0; i < result_list.length; i++){
+					html_list += "<option>" + result_list[i] + "</option>";
+				}
+				dropdowon_list.innerHTML = html_list;
+				dropdowon_list.size = result_list.length+1; //size the dropdown list
+				dropdowon_list.style.display = 'block';//show dropdown
+
+				//listen to change event on selection
+				dropdowon_list.onchange = function(){
+					input_text.value = this.value; //fill the value to input text
+					dropdowon_list.style.display = 'none'; //hide dropdown
+				};
+			}
+		};
+
+		//search sting contains val in arr
+		function search_list(val, arr){
+			var val_len = val.length;
+			var result_list = [];
+			for(var i = 0; i < arr.length; i++){
+				if (arr[i].substring(0, val_len).toLowerCase() == val.toLowerCase()) {
+					result_list.push(arr[i]);
+				};
+			}
+			return result_list;
+		}
+		
+		var booklist = ["Big Data Now", "Bad Data Handbook", "Planning for Big Data", "Big Data For Dummies", "Doing Data Science", "Data Analysis with Open Source Tools", "Too Big to Ignore", "The Signal and the Noise", "Predictive Analytics", "The Human Face of Big Data", "Data Science for Business", "The Black Swan", "Competing on Analytics", "Big Data Marketing", "Journeys to Data Mining", "The Fourth Paradigm", "Seven Databases in Seven Weeks","Data Mining and Predictive Analysis","A Statistical Guide for the Ethically Perplexed", "The Signal And The Noise", "Uncontrolled: The Surprising Payoff Of of Trial-and-Error For Business, Politics, and Society", "Data Mining: Practical Machine Learning Tools", "The Forrester Wave","Competing on Analytics", "Return on Customer: Creating Maximum Value", "Marketing As Strategy", "Marketing Payback", "Moneyball: The Art of Winning an Unfair Game", "Business Modeling and Data Mining", "The New Direct Marketing", "Strategic Databases Marketing", "Implementing Analytics", "Visualizing Data", "Data Mining Discovering and Visualizing Patterns with Python","Data Science for Business", "A Concise Guide to Compositional Data Analysis", "Alternative Methods of Regression", "How Algorithms Came to Rule Our World", "Machine Learning and Statistics","Applied Data Science", "Analyzing the Analyzers", "Two books on programming interviews","Forecasting: principles and practice", "Big Data Journal", "Three data science journals", "Practical Data Science with R", "Machine Learning plus Intelligent Optimization", "Advanced Database Marketing", "Predictive Analytics: Microsoft Excel", "Two new data science books from CRC Press", "Delivering Business Analytics: Practical Guidelines for Best Practice", "Secrets of the Big Data Revolution", "Naked Statistics: Stripping the Dread from the Data", "Business Analytics: A Practitioner's Guide", "SAS Books", "A Practitioner's Guide to Business Analytics", "Mining of Massive Data Sets", "wo interesting books", "Hadoop in Practice", "Improving Accuracy Through Combining Predictions", "30 statistics handbooks", "Statistics for Non-Statisticians", "New journal: Decision Analytics", "Machine Learning in Action", "Big Data - Principles and best practices of scalable realtime data", "Handbook of Data Intensive Computing","Practical Text Mining and Statistical Analysis", "New books on design of experiments (DOE)", "Data Mining: Concepts and Techniques", "Keyword Intelligence", "Journal of Data Science", "Data Mining", "Big Data Now: Current Perspectives", "Great statistics reference book covering a lot of topics", "The R Journal", "Data Analysis with Open Source Tools", "Competing on Analytics: The New Science of Winning", "Presenting to Win: The Art of Telling Your Story", "Information Visualization", "Encyclopedia of Machine Learning", "Analyzing Data from Facebook, Twitter, Linkedin, and Other Social Media", "Handbook of Natural Language Processing", "Mining of Massive Datasets", "Business Analytics for Managers", "Handbook of Fitting Statistical Distributions with R", "Data Mining Techniques in CRM: Inside Customer Segmentation", "10 new data mining books from IGI", "Handbook of Statistical Analysis and Data Mining Applications"];
+
+		var scientistslist =["Roger Bacon","Leonardo da Vinci", "Nicolaus Copernicus", "Andreas Vesalius", "Tycho Brahe", "Giordano Bruno","Galileo","Johannes Kepler", "William Harvey", "Robert Boyle","Antonie van Leeuwenhoek", "Robert Hooke", "John Ray", "Sir Isaac Newton","Carolus Linnaeus","Henry Cavendish","Joseph Priestley", "Luigi Galvani", "Sir William Herschel", "Antoine-Laurent Lavoisier", "Pierre-Simon Laplace", "Edward Jenner", "John Dalton", "Georges Cuvier","Alexander von Humboldt", "André-Marie Ampère", "Amedeo Avogadro", "Joseph-Louis Gay-Lussas", "Sir Humphry Davy", "Jöns Jacob Berzelius","John James Audubon","Michael Faraday", "Sir Charles Lyell","Louis Agassiz", "Charles Darwin", "Sir Francis Galton", "Gregor Mendel", "Louis Pasteur", "Alfred Russel Wallace","William Thomson","Joseph Lister", "James Clerk Maxwell", "Dmitry Ivanovich Mendeleyev", "Ivan Petrovich Pavlov", "A.A. Michelson", "Robert Koch", "Sigmund Freud", "Max Planck", "Nettie Maria Stevens", "William Bateson", "Pierre Curie", "Marie Curie", "Henrietta Swan Leavitt", "Ernest Rutherford", "Carl Jung", "Albert Einstein", "Alfred Lothar Wegener", "Sir Alexander Fleming","Niels Bohr","Erwin Schrödinger","Selman Abraham Waksman","Edwin Powell Hubble", "Linus Pauling", "Enrico Fermi", "Margaret Mead","Barbara McClintock", "Leakey Family", "George Gamow","J. Robert Oppenheimer","Hans Bethe", "Maria Goeppert Mayer", "Rachel Carson", "Jacques-Yves Cousteau", "Luis W. Alvarez", "Alan M. Turing", "Norman Ernest Borlaug", "Jonas Edward Salk", "Sir Fred Hoylee", "Francis Harry Compton Crick", "James Dewey Watson", "Richard P. Feynman", "Rosalind Franklin", "Edward O. Wilson", "Jane Goodall", "Sir Harold W. Kroto", "Richard E. Smalley", "Robert F. Curl, Jr.", "Stephen Jay Gould", "Stephen W. Hawking", "J. Craig Venter", "Francis Collins","Steven Pinker"];
+	</script>
+
+</body>
+</html>
