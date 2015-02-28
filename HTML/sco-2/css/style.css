@@ -1,0 +1,27 @@
+header,
+#login_form {
+    text-align: center;
+}
+
+.title {
+    color:gray;
+}
+
+img {
+    width: 250px;
+
+}
+
+mark {
+    background: yellow;
+}
+
+textarea {
+    width: 600px;
+    height: 100px;
+}
+
+summary {
+    font-size: 25px;
+    color: blue;
+}

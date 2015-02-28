@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SCO - English Question</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="container">
+    <header class="title">
+        <h3> CMPE 280 - MARK-DATALIST SCOs</h3>
+        <h4> Xiaoli Jiang 009390901</h4>
+    </header>
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">CMPE 280 SCO</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="math1.html">Math</a></li>
+                    <li><a href="cosine.html">Cosine</a></li>
+                    <li class="active"><a href="english.html">English</a></li>
+                    <li><a href="video.html">Video</a></li>
+                    <li><a href="survey.html">Survey</a></li>
+                    <li><a href="summary.html">Summary</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+
+    <div class="jumbotron">
+        <header><h3>Question 3</h3></header>
+
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <p>As per the latest twitter news, complete the article snippet given by
+                    selecting appropriate choices for the blanks.</p>
+
+                <form id="english_form">
+                    <div id="options1">
+                        <label><input type="radio" name="blank1" value="650"/>$650</label><br/>
+                        <label><input type="radio" name="blank1" value="550"/>$550</label><br/>
+                        <label><input type="radio" name="blank1" value="450"/>$450</label>
+                    </div>
+
+                    <div id="options2">
+                        <label><input type="radio" name="blank2" value="Twitter"/>Twitter</label><br/>
+                        <label><input type="radio" name="blank2" value="Google"/>Google</label><br/>
+                        <label><input type="radio" name="blank2" value="Facebook"/>Facebook</label>
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <button class="btn btn-primary" id="english_btn">Submit & Next Question</button>
+                    <button class="btn btn-default" id="clear_btn">Cancel & Clear Selection</button>
+                </form>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <blockquote cite="http://techcrunch.com/2014/09/10/twitter-to-raise-up-to-1-5b-in-debt-offering/">
+                    Twitter wants more cash. The company announced two <mark id="blank1">$_____</mark> million debt
+                    offerings in a filing today, each with a potential $100 increase provided
+                    that the sales are oversubscribed. Assuming full tip, including the $100 million
+                    boosters, <mark id="blank2">_____ </mark> will raise up to $1.5 billion with the two offerings.
+                </blockquote>
+
+                <p>Source: http://techcrunch.com/2014/09/10/twitter-to-raise-up-to-1-5b-in-debt-offering/</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p> &copy; CMPE 280 Spring2015 - Xiaoli Jiang</p>
+    </footer>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+
+</html>

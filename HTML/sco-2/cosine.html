@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SCO - Cosine Question</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="container">
+    <header class="title">
+        <h3> CMPE 280 - MARK-DATALIST SCOs</h3>
+        <h4> Xiaoli Jiang 009390901</h4>
+    </header>
+
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">CMPE 280 SCO</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="math1.html">Math</a></li>
+                    <li class="active"><a href="cosine.html">Cosine</a></li>
+                    <li><a href="english.html">English</a></li>
+                    <li><a href="video.html">Video</a></li>
+                    <li><a href="survey.html">Survey</a></li>
+                    <li><a href="summary.html">Summary</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+
+
+    <div class="jumbotron">
+        <header><h3>Question 2</h3></header>
+
+        <p>Select the cosine theorem formula.</p>
+
+        <form id="cosine_form">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <label><input type="radio" name="cosine" value="a"/>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mi>cos</mi><mfenced><mrow><mi>&#945;</mi><mo>&#177;</mo>
+                            <mi>&#946;</mi></mrow></mfenced><mo>=</mo><mi>cos</mi><mi>&#945;</mi>
+                            <mi>cos</mi><mi>&#946;</mi><mo>&mp;</mo><mi>sin</mi><mi>&#945;</mi>
+                            <mi>sin</mi><mi>&#946;</mi>
+                        </math>
+                    </label>
+                    <br/>
+                    <label><input type="radio" name="cosine" value="c"/>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mi>sin</mi><mi>&#945;</mi><mo>+</mo><mi>sin</mi><mi>&#946;</mi><mo>=</mo>
+                            <mn>2</mn><mi>sin</mi><mfenced><mfrac><mrow><mi>&#945;</mi><mo>+</mo>
+                            <mi>&#946;</mi></mrow><mn>2</mn></mfrac></mfenced><mi>cos</mi><mfenced>
+                            <mfrac><mrow><mi>&#945;</mi><mo>-</mo><mi>&#946;</mi></mrow><mn>2</mn></mfrac></mfenced>
+                        </math>
+                    </label>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <label><input type="radio" name="cosine" value="b"/>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mi>sin</mi><mfenced><mrow><mi>&#945;</mi><mo>&#177;</mo>
+                            <mi>&#946;</mi></mrow></mfenced><mo>=</mo><mi>sin</mi><mi>&#945;</mi>
+                            <mi>cos</mi><mi>&#946;</mi><mo>&#177;</mo><mi>cos</mi><mi>&#945;</mi>
+                            <mi>sin</mi><mi>&#946;</mi>
+                        </math>
+                    </label>
+                    <br/>
+                    <label><input type="radio" name="cosine" value="d"/>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mi>sin</mi><mi>&#945;</mi><mo>-</mo><mi>sin</mi><mi>&#946;</mi><mo>=</mo>
+                            <mn>2</mn><mi>cos</mi><mfenced><mfrac><mrow><mi>&#945;</mi><mo>+</mo>
+                            <mi>&#946;</mi></mrow><mn>2</mn></mfrac></mfenced><mi>sin</mi><mfenced>
+                            <mfrac><mrow><mi>&#945;</mi><mo>-</mo><mi>&#946;</mi></mrow><mn>2</mn></mfrac></mfenced>
+                        </math>
+                    </label>
+                </div>
+
+            </div>
+
+            <br/>
+
+            <p><b>Note:</b> The MathML is NOT supported in Chrome.</p>
+
+            <br/>
+            <br/>
+
+            <button class="btn btn-primary" id="cosine_btn">Submit & Next Question</button>
+            <button class="btn btn-default" id="clear_btn">Cancel & Clear Selection</button>
+        </form>
+
+    </div>
+
+
+
+    <footer class="footer">
+        <p> &copy; CMPE 280 Spring2015 - Xiaoli Jiang</p>
+    </footer>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+
+</html>

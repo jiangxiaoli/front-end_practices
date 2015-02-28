@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SCO - Survey</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="container">
+    <header class="title">
+        <h3> CMPE 280 - MARK-DATALIST SCOs</h3>
+        <h4> Xiaoli Jiang 009390901</h4>
+    </header>
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">CMPE 280 SCO</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="math1.html">Math</a></li>
+                    <li><a href="cosine.html">Cosine</a></li>
+                    <li><a href="english.html">English</a></li>
+                    <li><a href="video.html">Video</a></li>
+                    <li class="active"><a href="survey.html">Survey</a></li>
+                    <li><a href="summary.html">Summary</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+
+    <div class="jumbotron">
+        <header><h3>Survey</h3></header>
+
+        <p>How did you like the center?</p>
+
+        <form id="survey_form">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <label>Comments:</label>
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <textarea name="comments"></textarea>
+                </div>
+            </div>
+
+            <br/>
+
+            <p>Select Text Area Location</p>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <label>City: <input list="citys" name="city"></label>
+                    <datalist id="citys">
+                        <option value="San Jose">
+                        <option value="San Francisco">
+                        <option value="Mountain View">
+                        <option value="Palo Alto">
+                        <option value="Menlo Park">
+                    </datalist>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <label>Room Number#: <input list="rooms" name="room"></label>
+                    <datalist id="rooms">
+                        <option value="Room 337">
+                        <option value="Room 210">
+                        <option value="Room 110">
+                        <option value="Room 410">
+                        <option value="Room 189">
+                    </datalist>
+                </div>
+
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <button class="btn btn-primary" id="survey_btn">Submit & Get Score</button>
+            <button class="btn btn-primary" id="skip_btn">Skip & Get Score</button>
+        </form>
+
+    </div>
+
+    <footer class="footer">
+        <p> &copy; CMPE 280 Spring2015 - Xiaoli Jiang</p>
+    </footer>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
