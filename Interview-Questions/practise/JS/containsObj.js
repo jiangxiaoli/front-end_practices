@@ -14,17 +14,6 @@ function changeO() {
   delete test.prop;
 }
 
-var contains = function(obj, prop){
-	for(var name in obj){
-		if (name==prop) 
-			return true;
-		if (obj[name]!=null && typeof(obj[name])=='object') //check if prop is object
-			if(contains(obj[name], prop)) 
-				return true;
-	}
-	return false;
-}
-
 //prop is obj
 var contains = function(obj, prop){
 	for(var name in obj){
