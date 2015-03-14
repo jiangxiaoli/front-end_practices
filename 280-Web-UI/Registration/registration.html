@@ -1,0 +1,241 @@
+<!--
+CMPE 280 Registration Page
+Xiaoli Jinag 009390901
+-->
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <header>
+        <h3>CMPE 280 Registration Page</h3>
+        <h4>Xiaoli Jinag 009390901</h4>
+    </header>
+
+    <div class="content">
+        <form name="register_form">
+            <div class="row">
+                <aside><label>First Name</label></aside>
+                <section class="midcol"><input type="text" name="fname" placeholder="Enter first name"/></section>
+            </div>
+
+            <div class="row">
+                <aside><label>Last Name</label></aside>
+                <section class="midcol"><input type="text" name="lname" placeholder="Enter last name"/></section>
+            </div>
+
+            <div class="row">
+                <aside><label>Email</label></aside>
+                <section class="midcol"><input type="email" name="email" placeholder="Enter email address"/></section>
+            </div>
+
+            <div class="row">
+                <aside><label>Password</label></aside>
+                <section class="midcol"><input type="password" name="psw" placeholder="Enter password"/></section>
+                <section class="rigtcol">
+                    <progress id="psw_progress" max="100"></progress>
+                    <div id="pro_text"></div>
+                </section>
+            </div>
+
+            <div class="row">
+                <aside><label>Confirm Password</label></aside>
+                <section class="midcol"><input type="password" name="psw_conf" placeholder="Must be same as password"/></section>
+            </div>
+
+            <div class="row">
+                <aside><label>D. O. B.</label></aside>
+                <section class="midcol"><input type="date" name="dob"/></section>
+            </div>
+
+            <div class="row">
+                <aside><label>D. O. B. with time</label></aside>
+                <section class="midcol"><input type="datetime" name="dob_time"/></section>
+            </div>
+
+            <div class="row">
+                <aside><label>Local D. O. B.</label></aside>
+                <section class="midcol"><input type="datetime-local" name="dob_local"/></section>
+            </div>
+
+
+            <div class="row">
+                <aside><label>SSN</label></aside>
+                <section class="midcol"><input type="text" name="ssn" pattern="[0-9]{3}[0-9]{2}[0-9]{4}" placeholder="XXX-XX-XXXX"/></section>
+            </div>
+
+            <div class="row">
+                <aside><label>Phone</label></aside>
+                <section class="midcol"><input type="text" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="XXX-XXX-XXXX"/></section>
+            </div>
+
+            <div class="row">
+                <aside><label>Credit Card No</label></aside>
+                <section class="midcol"><input type="text" name="credit_card" pattern="([0-9]{4}[0-9]{4}[0-9]{4}[0-9]{4})|([0-9]{4}[0-9]{4}[0-9]{4})" placeholder="XXXX-XXXX-XXXX(-XXXX)"/></section>
+            </div>
+
+            <div class="row">
+                <aside><button>Create</button></aside>
+            </div>
+
+        </form>
+
+    </div>
+
+    <footer>
+        <p> &copy; CMPE 280 Spring2015 - Xiaoli Jiang</p>
+    </footer>
+
+    <script src="modernizr.custom.js"></script>
+    <script>
+
+        var form = document.register_form;
+        var pro_bar = document.getElementById("psw_progress");
+        pro_bar.style.display = "none"; //hide progress bar
+
+        var psw ="";
+
+        //listen to password input
+        form.psw.onkeyup = function () {
+
+            if(this.value.length > 24) alert("Maximun length of psw is 24 characters");
+            else {
+                //check strength, show progress bar
+                var strength = checkStrength(this.value);
+                document.getElementById("pro_text").innerHTML = strength;
+
+                switch (strength) {
+                    case "Weak":
+                        pro_bar.value = 10; break;
+                    case "Normal":
+                        pro_bar.value = 30; break;
+                    case "Medium":
+                        pro_bar.value = 50; break;
+                    case "Strong":
+                        pro_bar.value = 100; break;
+                }
+                pro_bar.style.display = "block"; //show progress bar
+            }
+        };
+
+        function checkStrength(psw) {
+            var uppercase = 0, lowercase = 0, spec =0;
+            for(var i = 0; i < psw.length; i++) {
+                if(psw.charAt(i) >= 'a' && psw.charAt(i) <= 'z') lowercase++;
+                else if(psw.charAt(i) >= 'A' && psw.charAt(i) <= 'Z') uppercase++;
+                else spec++;
+            }
+
+            //If password contains 3 Uppercase letters, 2 Lowercase letters
+            //and 2 special characters, then Password strength is Normal
+            if(uppercase >= 3 && lowercase >=2 && spec == 2) return "Normal";
+
+            //If password contains 3 Uppercase letters, 2 Lowercase letters
+            // and 3-5 special characters, then Password strength is Medium
+            if(uppercase >= 3 && lowercase >=2 && spec >=3 && spec <= 5) return "Medium";
+
+            //If password contains 3 Uppercase letters, 2 Lowercase letters
+            // and greater than 5 special characters, then Password strength is Strong
+            if(uppercase >= 3 && lowercase >=2 && spec > 5) return "Strong";
+
+            //If password contains less than 3 Uppercase letters, less than 2 Lowercase letters
+            //and less than 2 special characters, then Password strength is Weak
+            return "Weak";
+        }
+
+        //listen to out of focus on psw input
+        form.psw.onblur = function () {
+            pro_bar.style.display = "none";
+            document.getElementById("pro_text").innerHTML = "";
+            psw = this.value;
+            console.log(psw);
+        };
+
+        //check if confirmed password is same as the latter one
+        form.psw_conf.onchange = function () {
+            if(this.value != psw) {
+                this.value = "";
+                alert("Must be same as password!!");
+            }
+        };
+
+        form.onsubmit = function (e) {
+            e.preventDefault();
+
+            console.log(navigator.onLine);
+            if(navigator.onLine) {
+                //Store all the data that has been created so far in Session storage.
+                sessionStorage.fname = this.fname.value;
+                sessionStorage.lname = this.lname.value;
+                sessionStorage.email = this.email.value;
+                sessionStorage.psw = this.psw.value;
+                sessionStorage.dob = this.dob.value;
+                sessionStorage.dob_time = this.dob_time.value;
+                sessionStorage.dob_local = this.dob_local.value;
+                sessionStorage.ssn = this.ssn.value;
+                sessionStorage.phone = this.phone.value;
+                sessionStorage.credit_card = this.credit_card.value;
+            } else {
+                //if offline, store all the data that has been created so far in local storage.
+                localStorage.fname = this.fname.value;
+                localStorage.lname = this.lname.value;
+                localStorage.email = this.email.value;
+                localStorage.psw = this.psw.value;
+                localStorage.dob = this.dob.value;
+                localStorage.dob_time = this.dob_time.value;
+                localStorage.dob_local = this.dob_local.value;
+                localStorage.ssn = this.ssn.value;
+                localStorage.phone = this.phone.value;
+                localStorage.credit_card = this.credit_card.value;
+            }
+        };
+
+        // Using “modernizr”, check for local storage across various browsers
+        if (Modernizr.localstorage) {
+            // suppport local stroage
+            alert("Your browser supports local storage!");
+        } else {
+            // no native local storage support available :(
+            alert("Your browser dose NOT supports local storage!");
+        }
+
+        //What is the event that is triggered when
+        //internet connection is lost
+        //internet connection is retrieved
+        window.addEventListener('load', function() {
+
+            window.addEventListener("offline", function(e) {
+                alert("offline");
+
+                //If Browser is Offline mode detected, store all the values to local storage.
+                localStorage.fname = sessionStorage.fname;
+                localStorage.lname = sessionStorage.lname;
+                localStorage.email = sessionStorage.email;
+                localStorage.psw = sessionStorage.psw;
+                localStorage.dob = sessionStorage.dob;
+                localStorage.dob_time = sessionStorage.dob_time;
+                localStorage.dob_local = sessionStorage.dob_local;
+                localStorage.ssn = sessionStorage.ssn;
+                localStorage.phone = sessionStorage.phone;
+                localStorage.credit_card = sessionStorage.credit_card;
+
+            }, false);
+
+            window.addEventListener("online", function(e) {
+                alert("online");
+
+                //clear local storage
+                localStorage.clear();
+            }, false);
+
+        });
+
+
+    </script>
+
+</body>
+</html>
